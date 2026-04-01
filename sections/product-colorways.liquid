@@ -1,0 +1,158 @@
+<section class="pdp-colors">
+  <div class="pdp-colors__inner">
+    {% if section.settings.label != blank %}
+      <span class="pdp-colors__label rv">{{ section.settings.label }}</span>
+    {% endif %}
+    {% if section.settings.heading != blank %}
+      <h2 class="pdp-colors__heading rv d1">{{ section.settings.heading }}</h2>
+    {% endif %}
+    {% if section.settings.description != blank %}
+      <p class="pdp-colors__sub rv d2">{{ section.settings.description }}</p>
+    {% endif %}
+    <div class="pdp-colors__options rv d3">
+      {% for block in section.blocks %}
+        <div class="pdp-color-opt{% if forloop.first %} active{% endif %}" {{ block.shopify_attributes }}>
+          <div class="pdp-color-swatch" style="background: {{ block.settings.color }}"></div>
+          <span class="pdp-color-name">{{ block.settings.name }}</span>
+        </div>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+
+{% stylesheet %}
+  .pdp-colors__inner {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 100px 20px;
+  }
+  .pdp-colors__label {
+    font-family: var(--font-heading);
+    font-size: 0.48rem;
+    font-weight: 700;
+    letter-spacing: 0.4em;
+    text-transform: uppercase;
+    color: var(--ink-f);
+    margin-bottom: 14px;
+    display: block;
+  }
+  .pdp-colors__heading {
+    font-family: var(--font-heading);
+    font-weight: 300;
+    font-size: clamp(1.4rem, 3vw, 2rem);
+    line-height: 1.35;
+    color: var(--cocoa);
+    margin-bottom: 12px;
+  }
+  .pdp-colors__sub {
+    font-size: 0.82rem;
+    line-height: 1.7;
+    color: var(--ink-m);
+    margin-bottom: 32px;
+    max-width: 520px;
+  }
+  .pdp-colors__options {
+    display: flex;
+    gap: 20px;
+    flex-wrap: wrap;
+  }
+  .pdp-color-opt {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+    cursor: pointer;
+    transition: transform 0.3s;
+  }
+  .pdp-color-opt:hover {
+    transform: translateY(-3px);
+  }
+  .pdp-color-swatch {
+    width: 56px;
+    height: 56px;
+    border-radius: 50%;
+    border: 2px solid transparent;
+    transition: border-color 0.3s;
+    position: relative;
+  }
+  .pdp-color-opt.active .pdp-color-swatch {
+    border-color: var(--cocoa);
+  }
+  .pdp-color-opt.active .pdp-color-swatch::after {
+    content: '';
+    position: absolute;
+    inset: 4px;
+    border-radius: 50%;
+    border: 1px solid rgba(255, 255, 255, 0.6);
+  }
+  .pdp-color-name {
+    font-family: var(--font-heading);
+    font-size: 0.48rem;
+    font-weight: 600;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--ink-f);
+  }
+  @media (max-width: 600px) {
+    .pdp-colors__inner { padding: 80px 20px; }
+  }
+{% endstylesheet %}
+
+{% schema %}
+{
+  "name": "Product Colorways",
+  "settings": [
+    {
+      "type": "text",
+      "id": "label",
+      "label": "Section label",
+      "default": "Colorways"
+    },
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "Choose your sky."
+    },
+    {
+      "type": "textarea",
+      "id": "description",
+      "label": "Description",
+      "default": "Each Drifter is printed in one of our signature Awai tones. Lamp variants use translucent material for that warm ambient glow. Sculptures are printed in our matte finish."
+    }
+  ],
+  "blocks": [
+    {
+      "type": "color",
+      "name": "Color",
+      "settings": [
+        {
+          "type": "text",
+          "id": "name",
+          "label": "Color name",
+          "default": "Vanille"
+        },
+        {
+          "type": "color",
+          "id": "color",
+          "label": "Swatch color",
+          "default": "#EDE8D6"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Product Colorways",
+      "blocks": [
+        { "type": "color", "settings": { "name": "Vanille", "color": "#EDE8D6" } },
+        { "type": "color", "settings": { "name": "Cloud", "color": "#C0CEDC" } },
+        { "type": "color", "settings": { "name": "Lila", "color": "#D5D0DE" } },
+        { "type": "color", "settings": { "name": "Blush", "color": "#DED4D8" } },
+        { "type": "color", "settings": { "name": "Sage", "color": "#C8D0B8" } }
+      ]
+    }
+  ],
+  "disabled_on": { "groups": ["header", "footer"] }
+}
+{% endschema %}

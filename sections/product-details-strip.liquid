@@ -1,0 +1,83 @@
+<div class="pdp-details full-width">
+  <div class="pdp-details__inner">
+    {% for block in section.blocks %}
+      <div class="pdp-details__item rv{% if forloop.index > 1 %} d{{ forloop.index | minus: 1 }}{% endif %}" {{ block.shopify_attributes }}>
+        <h3>{{ block.settings.label }}</h3>
+        <p>{{ block.settings.value }}</p>
+      </div>
+    {% endfor %}
+  </div>
+</div>
+
+{% stylesheet %}
+  .pdp-details {
+    background: var(--sf);
+    padding: 48px 20px;
+    border-top: 1px solid rgba(61, 56, 53, 0.04);
+    border-bottom: 1px solid rgba(61, 56, 53, 0.04);
+  }
+  .pdp-details__inner {
+    max-width: 1100px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    gap: 32px;
+    text-align: center;
+  }
+  .pdp-details__item h3 {
+    font-family: var(--font-heading);
+    font-weight: 600;
+    font-size: 0.52rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--ink-f);
+    margin-bottom: 6px;
+  }
+  .pdp-details__item p {
+    font-family: var(--font-heading);
+    font-weight: 400;
+    font-size: 0.82rem;
+    color: var(--cocoa);
+  }
+{% endstylesheet %}
+
+{% schema %}
+{
+  "name": "Product Details Strip",
+  "settings": [],
+  "blocks": [
+    {
+      "type": "detail",
+      "name": "Detail",
+      "settings": [
+        {
+          "type": "text",
+          "id": "label",
+          "label": "Label",
+          "default": "Material"
+        },
+        {
+          "type": "text",
+          "id": "value",
+          "label": "Value",
+          "default": "Plant-based PLA"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Product Details Strip",
+      "blocks": [
+        { "type": "detail", "settings": { "label": "Material", "value": "Plant-based PLA" } },
+        { "type": "detail", "settings": { "label": "Process", "value": "Made to order" } },
+        { "type": "detail", "settings": { "label": "Lead Time", "value": "5–10 business days" } },
+        { "type": "detail", "settings": { "label": "Shipping", "value": "Complimentary within the US" } }
+      ]
+    }
+  ],
+  "disabled_on": {
+    "groups": ["header", "footer"]
+  }
+}
+{% endschema %}
