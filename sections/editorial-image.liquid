@@ -1,0 +1,153 @@
+<div class="editorial full-width">
+  <div class="editorial__inner">
+    {% if section.settings.image != blank %}
+      {{ section.settings.image | image_url: width: 2400 | image_tag: class: 'editorial__img', loading: 'lazy' }}
+    {% else %}
+      <div class="editorial__placeholder {{ section.settings.placeholder_style }}">
+        <span>{{ section.settings.placeholder_text | default: 'Lifestyle image' }}</span>
+      </div>
+    {% endif %}
+
+    {% if section.settings.overlay_text != blank %}
+      <div class="editorial__overlay-content">
+        <p class="editorial__text">{{ section.settings.overlay_text }}</p>
+        {% if section.settings.cta_text != blank %}
+          <a href="{{ section.settings.cta_link }}" class="editorial__cta">{{ section.settings.cta_text }}</a>
+        {% endif %}
+      </div>
+    {% endif %}
+  </div>
+</div>
+
+{% stylesheet %}
+  .editorial {
+    width: 100%;
+    overflow: hidden;
+    margin: var(--gap) 0;
+  }
+
+  .editorial__inner {
+    width: 100%;
+    height: 78vh;
+    min-height: 440px;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .editorial__inner img {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .editorial__placeholder {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .editorial__placeholder span {
+    font-family: var(--font-heading);
+    font-size: 0.42rem;
+    font-weight: 500;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--ink-f);
+  }
+
+  /* Placeholder gradient styles */
+  .editorial__placeholder.style-a {
+    background: linear-gradient(150deg, var(--vanille) 0%, var(--cloud-s) 50%, var(--lila-s) 100%);
+  }
+  .editorial__placeholder.style-b {
+    background: linear-gradient(150deg, var(--sage-s) 0%, var(--vanille-s) 45%, var(--cloud-s) 100%);
+  }
+
+  /* Optional overlay content */
+  .editorial__overlay-content {
+    position: relative;
+    z-index: 2;
+    text-align: center;
+  }
+  .editorial__text {
+    font-family: var(--font-heading);
+    font-weight: 300;
+    font-size: clamp(1.4rem, 3vw, 2.2rem);
+    line-height: 1.3;
+    color: #fff;
+    margin-bottom: 18px;
+  }
+  .editorial__cta {
+    font-family: var(--font-heading);
+    font-weight: 600;
+    font-size: 0.44rem;
+    letter-spacing: 0.28em;
+    text-transform: uppercase;
+    color: rgba(255, 255, 255, 0.65);
+    text-decoration: none;
+    transition: color 0.3s;
+  }
+  .editorial__cta:hover {
+    color: #fff;
+  }
+{% endstylesheet %}
+
+{% schema %}
+{
+  "name": "Editorial Image",
+  "settings": [
+    {
+      "type": "image_picker",
+      "id": "image",
+      "label": "Image"
+    },
+    {
+      "type": "select",
+      "id": "placeholder_style",
+      "label": "Placeholder gradient (when no image)",
+      "options": [
+        {
+          "value": "style-a",
+          "label": "Warm (Vanille → Cloud → Lila)"
+        },
+        {
+          "value": "style-b",
+          "label": "Earth (Sage → Vanille → Cloud)"
+        }
+      ],
+      "default": "style-a"
+    },
+    {
+      "type": "text",
+      "id": "placeholder_text",
+      "label": "Placeholder text",
+      "default": "Lifestyle image"
+    },
+    {
+      "type": "text",
+      "id": "overlay_text",
+      "label": "Overlay heading (optional)"
+    },
+    {
+      "type": "text",
+      "id": "cta_text",
+      "label": "Overlay button text (optional)"
+    },
+    {
+      "type": "url",
+      "id": "cta_link",
+      "label": "Overlay button link"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Editorial Image"
+    }
+  ]
+}
+{% endschema %}
