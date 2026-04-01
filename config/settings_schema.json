@@ -1,26 +1,11 @@
 [
   {
     "name": "theme_info",
-    "theme_name": "Skeleton",
+    "theme_name": "Awai Atelier",
     "theme_version": "0.1.0",
-    "theme_author": "Shopify",
+    "theme_author": "Awai Atelier",
     "theme_documentation_url": "https://help.shopify.com/manual/online-store/themes",
     "theme_support_url": "https://support.shopify.com/"
-  },
-  {
-    "name": "t:general.typography",
-    "settings": [
-      {
-        "type": "header",
-        "content": "t:general.fonts"
-      },
-      {
-        "type": "font_picker",
-        "id": "type_primary_font",
-        "default": "work_sans_n4",
-        "label": "t:general.primary"
-      }
-    ]
   },
   {
     "name": "t:general.layout",
@@ -31,25 +16,25 @@
         "label": "t:labels.page_width",
         "options": [
           {
-            "value": "90rem",
-            "label": "t:options.page_width.narrow"
+            "value": "1100px",
+            "label": "Standard (1100px)"
           },
           {
-            "value": "110rem",
-            "label": "t:options.page_width.wide"
+            "value": "1200px",
+            "label": "Wide (1200px)"
           }
         ],
-        "default": "90rem"
+        "default": "1200px"
       },
       {
         "type": "range",
         "id": "min_page_margin",
-        "min": 10,
+        "min": 16,
         "max": 100,
-        "step": 1,
+        "step": 4,
         "unit": "px",
         "label": "t:labels.page_margin",
-        "default": 20
+        "default": 28
       }
     ]
   },
@@ -59,24 +44,14 @@
       {
         "type": "color",
         "id": "background_color",
-        "default": "#FFFFFF",
+        "default": "#FDFCFA",
         "label": "t:labels.background"
       },
       {
         "type": "color",
         "id": "foreground_color",
-        "default": "#333333",
+        "default": "#3D3835",
         "label": "t:labels.foreground"
-      },
-      {
-        "type": "range",
-        "id": "input_corner_radius",
-        "min": 0,
-        "max": 10,
-        "step": 1,
-        "unit": "px",
-        "label": "t:labels.input_corner_radius",
-        "default": 4
       }
     ]
   }

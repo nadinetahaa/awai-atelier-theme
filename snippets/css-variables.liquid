@@ -1,18 +1,67 @@
 {% style %}
-  {% # Loads all font variantions with display: swap %}
-  {{ settings.type_primary_font | font_face: font_display: 'swap' }}
-  {{ settings.type_primary_font | font_modify: 'weight', 'bold' | font_face: font_display: 'swap' }}
-  {{ settings.type_primary_font | font_modify: 'weight', 'bold' | font_modify: 'style', 'italic' | font_face: font_display: 'swap' }}
-  {{ settings.type_primary_font | font_modify: 'style', 'italic' | font_face: font_display: 'swap' }}
-
   :root {
-    --font-primary--family: {{ settings.type_primary_font.family }}, {{ settings.type_primary_font.fallback_families }};
-    --font-primary--style: {{ settings.type_primary_font.style }};
-    --font-primary--weight: {{ settings.type_primary_font.weight }};
-    --page-width: {{ settings.max_page_width }};
-    --page-margin: {{ settings.min_page_margin }}px;
-    --color-background: {{ settings.background_color }};
-    --color-foreground: {{ settings.foreground_color }};
-    --style-border-radius-inputs: {{ settings.input_corner_radius }}px;
+    /* Typography */
+    --font-heading: 'Quicksand', sans-serif;
+    --font-body: 'Plus Jakarta Sans', sans-serif;
+
+    /* Core palette */
+    --vanille: #EDE8D6;
+    --vanille-s: #F5F1E6;
+    --citron: #E8E0B0;
+    --citron-s: #F0EBD0;
+    --cloud: #C0CEDC;
+    --cloud-s: #D8E2EC;
+    --sage: #C8D0B8;
+    --sage-s: #DDE2D0;
+
+    /* Supporting */
+    --lila: #D5D0DE;
+    --lila-s: #E6E3EC;
+    --blush: #DED4D8;
+    --blush-s: #EDE6E9;
+    --mist: #D0CDD6;
+    --mist-s: #E2E0E8;
+
+    /* Neutrals */
+    --cocoa: #3D3835;
+    --ink-m: #5A5550;
+    --ink-l: #8A8580;
+    --ink-f: #B5B0AA;
+    --sf: #F7F5F1;
+    --sf-w: #F0ECE5;
+    --wh: #FDFCFA;
+
+    /* Semantic mappings */
+    --color-background: var(--wh);
+    --color-foreground: var(--cocoa);
+    --color-body-text: var(--ink-m);
+    --color-caption: var(--ink-l);
+    --color-placeholder: var(--ink-f);
+    --color-surface: var(--sf);
+
+    /* Layout */
+    --page-width: 1200px;
+    --page-margin: 28px;
+    --content-max: 1100px;
+    --text-max: 580px;
+    --gap: 5px;
+
+    /* Spacing (base-8) */
+    --space-xs: 8px;
+    --space-s: 16px;
+    --space-m: 24px;
+    --space-l: 40px;
+    --space-xl: 64px;
+    --space-2xl: 96px;
+    --space-3xl: 140px;
+
+    /* Border radius */
+    --radius-s: 16px;
+    --radius-card: 22px;
+    --radius-section: 28px;
+    --radius-pill: 200px;
+
+    /* Input styling */
+    --style-border-radius-inputs: var(--radius-pill);
   }
 {% endstyle %}

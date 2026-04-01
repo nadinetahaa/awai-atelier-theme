@@ -1,56 +1,278 @@
-<footer>
-  <div class="footer__copyright">
-    &copy;
-    {{ 'now' | date: '%Y' }}
-    {{ shop.name | link_to: routes.root_url }}, {{ powered_by_link }}
-  </div>
+<footer class="awai-footer">
+  <div class="awai-footer__inner">
+    <div class="awai-footer__top">
+      <!-- Brand + Newsletter -->
+      <div class="awai-footer__brand-col">
+        <div class="awai-footer__brand">awai</div>
+        <p class="awai-footer__desc">{{ section.settings.description }}</p>
+        {% if section.settings.show_newsletter %}
+          {% form 'customer', class: 'awai-footer__nl' %}
+            <input type="email" name="contact[email]" placeholder="Email" autocomplete="email" required>
+            <button type="submit">Sign Up</button>
+          {% endform %}
+        {% endif %}
+      </div>
 
-  <div class="footer__links">
-    {% for link in section.settings.menu.links %}
-      {{ link.title | link_to: link.url }}
-    {% endfor %}
-  </div>
+      <!-- Shop links -->
+      {% if section.settings.menu_shop != blank %}
+        <div class="awai-footer__col">
+          <div class="awai-footer__col-title">Shop</div>
+          {% for link in section.settings.menu_shop.links %}
+            <a href="{{ link.url }}">{{ link.title }}</a>
+          {% endfor %}
+        </div>
+      {% endif %}
 
-  <div class="footer__payment">
-    {% if section.settings.show_payment_icons %}
-      {% for type in shop.enabled_payment_types %}
-        {{ type | payment_type_svg_tag }}
-      {% endfor %}
-    {% endif %}
+      <!-- About links -->
+      {% if section.settings.menu_about != blank %}
+        <div class="awai-footer__col">
+          <div class="awai-footer__col-title">About</div>
+          {% for link in section.settings.menu_about.links %}
+            <a href="{{ link.url }}">{{ link.title }}</a>
+          {% endfor %}
+        </div>
+      {% endif %}
+
+      <!-- Support links -->
+      {% if section.settings.menu_support != blank %}
+        <div class="awai-footer__col">
+          <div class="awai-footer__col-title">Support</div>
+          {% for link in section.settings.menu_support.links %}
+            <a href="{{ link.url }}">{{ link.title }}</a>
+          {% endfor %}
+        </div>
+      {% endif %}
+    </div>
+
+    <div class="awai-footer__bottom">
+      <span class="awai-footer__copy">&copy; {{ 'now' | date: '%Y' }} {{ shop.name }}</span>
+      <div class="awai-footer__social">
+        {% if section.settings.social_tiktok != blank %}
+          <a href="{{ section.settings.social_tiktok }}" target="_blank" rel="noopener">TikTok</a>
+        {% endif %}
+        {% if section.settings.social_instagram != blank %}
+          <a href="{{ section.settings.social_instagram }}" target="_blank" rel="noopener">Instagram</a>
+        {% endif %}
+        {% if section.settings.social_pinterest != blank %}
+          <a href="{{ section.settings.social_pinterest }}" target="_blank" rel="noopener">Pinterest</a>
+        {% endif %}
+      </div>
+    </div>
   </div>
 </footer>
 
 {% stylesheet %}
-  footer {
+  .awai-footer {
+    background: var(--sf);
+    padding: 56px 28px 28px;
+    color: var(--cocoa);
+    border-top: 1px solid rgba(61, 56, 53, 0.04);
+  }
+
+  .awai-footer__inner {
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+
+  .awai-footer__top {
+    display: grid;
+    grid-template-columns: 1.6fr 1fr 1fr 1fr;
+    gap: 40px;
+    margin-bottom: 48px;
+  }
+
+  /* Brand column */
+  .awai-footer__brand {
+    font-family: var(--font-heading);
+    font-weight: 400;
+    font-size: 1.05rem;
+    letter-spacing: 0.08em;
+    color: var(--cocoa);
+    margin-bottom: 10px;
+  }
+
+  .awai-footer__desc {
+    font-size: 0.66rem;
+    line-height: 1.8;
+    color: var(--ink-l);
+    max-width: 220px;
+    margin-bottom: 18px;
+  }
+
+  /* Newsletter */
+  .awai-footer__nl {
+    display: flex;
+    gap: 5px;
+    max-width: 240px;
+  }
+
+  .awai-footer__nl input[type="email"] {
+    flex: 1;
+    padding: 8px 14px;
+    border-radius: 200px;
+    border: 1px solid rgba(61, 56, 53, 0.1);
+    background: transparent;
+    font-family: var(--font-body);
+    font-size: 0.66rem;
+    color: var(--cocoa);
+    outline: none;
+    transition: border-color 0.3s;
+  }
+  .awai-footer__nl input[type="email"]::placeholder {
+    color: var(--ink-f);
+  }
+  .awai-footer__nl input[type="email"]:focus {
+    border-color: var(--ink-l);
+  }
+
+  .awai-footer__nl button {
+    font-family: var(--font-heading);
+    font-weight: 600;
+    font-size: 0.38rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--wh);
+    background: var(--cocoa);
+    border: none;
+    padding: 8px 14px;
+    border-radius: 200px;
+    cursor: pointer;
+    transition: all 0.3s;
+    white-space: nowrap;
+  }
+  .awai-footer__nl button:hover {
+    background: var(--ink-m);
+  }
+
+  /* Link columns */
+  .awai-footer__col-title {
+    font-family: var(--font-heading);
+    font-size: 0.38rem;
+    font-weight: 700;
+    letter-spacing: 0.35em;
+    text-transform: uppercase;
+    color: var(--ink-f);
+    margin-bottom: 12px;
+  }
+
+  .awai-footer__col a {
+    display: block;
+    font-size: 0.66rem;
+    color: var(--ink-l);
+    text-decoration: none;
+    margin-bottom: 7px;
+    transition: color 0.3s;
+  }
+  .awai-footer__col a:hover {
+    color: var(--cocoa);
+  }
+
+  /* Bottom bar */
+  .awai-footer__bottom {
+    border-top: 1px solid rgba(61, 56, 53, 0.05);
+    padding-top: 16px;
     display: flex;
     justify-content: space-between;
-    margin-top: 2rem;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 8px;
   }
-  footer a {
-    text-decoration: none;
-    color: var(--color-foreground);
+
+  .awai-footer__copy {
+    font-family: var(--font-heading);
+    font-size: 0.36rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--ink-f);
+    font-weight: 500;
   }
-  footer .footer__links,
-  footer .footer__payment {
+
+  .awai-footer__social {
     display: flex;
-    gap: 1rem;
+    gap: 16px;
+  }
+  .awai-footer__social a {
+    font-family: var(--font-heading);
+    font-size: 0.36rem;
+    font-weight: 600;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--ink-f);
+    text-decoration: none;
+    transition: color 0.3s;
+  }
+  .awai-footer__social a:hover {
+    color: var(--cocoa);
+  }
+
+  /* Responsive */
+  @media (max-width: 700px) {
+    .awai-footer__top {
+      grid-template-columns: 1fr 1fr;
+      gap: 20px;
+    }
+  }
+  @media (max-width: 450px) {
+    .awai-footer__top {
+      grid-template-columns: 1fr;
+    }
+  }
+  @media (max-width: 600px) {
+    .awai-footer {
+      padding: 40px 16px 20px;
+    }
+    .awai-footer__bottom {
+      flex-direction: column;
+      align-items: flex-start;
+    }
   }
 {% endstylesheet %}
 
 {% schema %}
 {
-  "name": "t:general.footer",
+  "name": "Footer",
   "settings": [
     {
-      "type": "link_list",
-      "id": "menu",
-      "label": "t:labels.menu"
+      "type": "textarea",
+      "id": "description",
+      "label": "Brand description",
+      "default": "Nursery design studio. 3D printed lighting and sculpture from plant-based material."
     },
     {
       "type": "checkbox",
-      "id": "show_payment_icons",
-      "label": "t:labels.show_payment_icons",
+      "id": "show_newsletter",
+      "label": "Show newsletter signup",
       "default": true
+    },
+    {
+      "type": "link_list",
+      "id": "menu_shop",
+      "label": "Shop menu"
+    },
+    {
+      "type": "link_list",
+      "id": "menu_about",
+      "label": "About menu"
+    },
+    {
+      "type": "link_list",
+      "id": "menu_support",
+      "label": "Support menu"
+    },
+    {
+      "type": "url",
+      "id": "social_tiktok",
+      "label": "TikTok URL"
+    },
+    {
+      "type": "url",
+      "id": "social_instagram",
+      "label": "Instagram URL"
+    },
+    {
+      "type": "url",
+      "id": "social_pinterest",
+      "label": "Pinterest URL"
     }
   ]
 }

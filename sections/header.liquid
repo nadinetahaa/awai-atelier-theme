@@ -1,76 +1,204 @@
-<header>
-  <h2 class="header__title">
-    {{ shop.name | link_to: routes.root_url }}
-  </h2>
+<header class="awai-header{% if section.settings.transparent %} awai-header--transparent{% endif %}" id="awai-header">
+  <a href="{{ routes.root_url }}" class="awai-header__logo">awai</a>
 
-  <div class="header__menu">
-    {% for link in section.settings.menu.links %}
-      {{ link.title | link_to: link.url }}
-    {% endfor %}
-  </div>
+  <div class="awai-header__right">
+    <nav class="awai-header__nav">
+      {% for link in section.settings.menu.links %}
+        <a href="{{ link.url }}">{{ link.title }}</a>
+      {% endfor %}
+    </nav>
 
-  <div class="header__icons">
-    {% if shop.customer_accounts_enabled %}
-      <shopify-account menu="{{ section.settings.customer_account_menu }}">
-        {{ 'icon-account.svg' | inline_asset_content }}
-      </shopify-account>
-    {% endif %}
-
-    <a href="{{ routes.cart_url }}">
+    <a href="{{ routes.cart_url }}" class="awai-header__cart" aria-label="Cart">
+      <svg viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+        <path d="M5 7h10v9a1 1 0 0 1-1 1H6a1 1 0 0 1-1-1V7Z"/>
+        <path d="M7.5 7V5.5a2.5 2.5 0 0 1 5 0V7"/>
+      </svg>
       {% if cart.item_count > 0 %}
-        <sup>{{ cart.item_count }}</sup>
+        <span class="awai-header__cart-count">{{ cart.item_count }}</span>
       {% endif %}
-
-      {{ 'icon-cart.svg' | inline_asset_content }}
     </a>
   </div>
 </header>
 
+{% if section.settings.transparent %}
+<script>
+  (function() {
+    var hdr = document.getElementById('awai-header');
+    function updateHeader() {
+      var scrolled = window.scrollY > window.innerHeight * 0.6;
+      hdr.classList.toggle('awai-header--transparent', !scrolled);
+      hdr.classList.toggle('awai-header--solid', scrolled);
+    }
+    window.addEventListener('scroll', updateHeader, { passive: true });
+    updateHeader();
+  })();
+</script>
+{% endif %}
+
 {% stylesheet %}
-  header {
-    height: 5rem;
+  .awai-header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 100;
+    padding: 18px 28px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    transition: all 0.45s ease;
+    /* Default: solid frosted glass */
+    background: rgba(253, 252, 250, 0.94);
+    backdrop-filter: blur(18px);
+    -webkit-backdrop-filter: blur(18px);
+    border-bottom: 1px solid rgba(61, 56, 53, 0.03);
+  }
+
+  /* Solid state (default + scroll-past-hero) */
+  .awai-header .awai-header__logo {
+    font-family: var(--font-heading);
+    font-weight: 400;
+    font-size: 1.05rem;
+    letter-spacing: 0.08em;
+    color: var(--cocoa);
+    text-decoration: none;
+    transition: color 0.4s;
+  }
+
+  .awai-header .awai-header__nav a {
+    font-family: var(--font-heading);
+    font-size: 0.46rem;
+    font-weight: 600;
+    letter-spacing: 0.28em;
+    text-transform: uppercase;
+    text-decoration: none;
+    color: var(--ink-l);
+    transition: color 0.4s;
+  }
+  .awai-header .awai-header__nav a:hover {
+    color: var(--cocoa);
+  }
+
+  .awai-header .awai-header__cart svg {
+    width: 16px;
+    height: 16px;
+    stroke: var(--cocoa);
+    fill: none;
+    stroke-width: 1.2;
+    transition: color 0.4s;
+  }
+
+  /* Transparent state (homepage hero) */
+  .awai-header--transparent {
+    background: transparent;
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
+    border-bottom-color: transparent;
+  }
+  .awai-header--transparent .awai-header__logo {
+    color: #fff;
+  }
+  .awai-header--transparent .awai-header__nav a {
+    color: rgba(255, 255, 255, 0.5);
+  }
+  .awai-header--transparent .awai-header__nav a:hover {
+    color: #fff;
+  }
+  .awai-header--transparent .awai-header__cart svg {
+    stroke: #fff;
+  }
+
+  /* Solid state (explicit class after scroll) */
+  .awai-header--solid {
+    background: rgba(253, 252, 250, 0.94);
+    backdrop-filter: blur(18px);
+    -webkit-backdrop-filter: blur(18px);
+    border-bottom: 1px solid rgba(61, 56, 53, 0.03);
+  }
+  .awai-header--solid .awai-header__logo {
+    color: var(--cocoa);
+  }
+  .awai-header--solid .awai-header__nav a {
+    color: var(--ink-l);
+  }
+  .awai-header--solid .awai-header__nav a:hover {
+    color: var(--cocoa);
+  }
+  .awai-header--solid .awai-header__cart svg {
+    stroke: var(--cocoa);
+  }
+
+  /* Layout */
+  .awai-header__right {
     display: flex;
     align-items: center;
-    justify-content: space-between;
+    gap: 22px;
   }
-  header a {
-    position: relative;
+
+  .awai-header__nav {
+    display: flex;
+    gap: 22px;
+  }
+
+  .awai-header__cart {
+    display: flex;
+    align-items: center;
     text-decoration: none;
-    color: var(--color-foreground);
+    transition: opacity 0.3s;
+    position: relative;
+  }
+  .awai-header__cart:hover {
+    opacity: 0.6;
+  }
+
+  .awai-header__cart-count {
+    position: absolute;
+    top: -6px;
+    right: -8px;
+    font-family: var(--font-heading);
+    font-size: 0.4rem;
+    font-weight: 700;
+    background: var(--cocoa);
+    color: var(--wh);
+    width: 14px;
+    height: 14px;
+    border-radius: 50%;
     display: flex;
     align-items: center;
     justify-content: center;
+    line-height: 1;
   }
-  header a sup {
-    position: absolute;
-    left: 100%;
-    overflow: hidden;
-    max-width: var(--page-margin);
-  }
-  header svg {
-    width: 2rem;
-  }
-  header .header__menu,
-  header .header__icons {
-    display: flex;
-    gap: 1rem;
+
+  /* Responsive */
+  @media (max-width: 600px) {
+    .awai-header {
+      padding: 14px 16px;
+    }
+    .awai-header__right {
+      gap: 14px;
+    }
+    .awai-header__nav {
+      gap: 14px;
+    }
   }
 {% endstylesheet %}
 
 {% schema %}
 {
-  "name": "t:general.header",
+  "name": "Header",
   "settings": [
     {
       "type": "link_list",
       "id": "menu",
-      "label": "t:labels.menu"
+      "label": "Navigation menu",
+      "default": "main-menu"
     },
     {
-      "type": "link_list",
-      "id": "customer_account_menu",
-      "label": "t:labels.customer_account_menu",
-      "default": "customer-account-main-menu"
+      "type": "checkbox",
+      "id": "transparent",
+      "label": "Transparent header over hero",
+      "info": "Enable on homepage to show transparent header that becomes solid on scroll.",
+      "default": false
     }
   ]
 }
