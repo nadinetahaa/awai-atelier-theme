@@ -49,7 +49,7 @@
       "settings": {
         "label": "The Drifter — Sculpture",
         "link_text": "View All",
-        "collection": "",
+        "collection": "frontpage",
         "products_to_show": 5
       }
     },
