@@ -6,7 +6,7 @@
   <a href="{{ routes.root_url }}" class="awai-header__logo">awai</a>
 
   <div class="awai-header__right">
-    <nav class="awai-header__nav">
+    <nav class="awai-header__nav" id="awai-nav">
       {% for link in section.settings.menu.links %}
         <a href="{{ link.url }}">{{ link.title }}</a>
       {% endfor %}
@@ -21,8 +21,22 @@
         <span class="awai-header__cart-count">{{ cart.item_count }}</span>
       {% endif %}
     </a>
+
+    <!-- Hamburger (mobile only) -->
+    <button class="awai-header__burger" id="awai-burger" aria-label="Menu" aria-expanded="false">
+      <span></span><span></span>
+    </button>
   </div>
 </header>
+
+<!-- Mobile nav overlay -->
+<div class="awai-mobile-nav" id="awai-mobile-nav">
+  <nav class="awai-mobile-nav__links">
+    {% for link in section.settings.menu.links %}
+      <a href="{{ link.url }}">{{ link.title }}</a>
+    {% endfor %}
+  </nav>
+</div>
 
 {% if is_transparent %}
 <script>
@@ -39,6 +53,35 @@
 </script>
 {% endif %}
 
+<script>
+  (function() {
+    var burger = document.getElementById('awai-burger');
+    var mobileNav = document.getElementById('awai-mobile-nav');
+    var header = document.getElementById('awai-header');
+    if (!burger || !mobileNav) return;
+    burger.addEventListener('click', function() {
+      var isOpen = mobileNav.classList.toggle('open');
+      burger.classList.toggle('open', isOpen);
+      burger.setAttribute('aria-expanded', isOpen);
+      document.documentElement.style.overflow = isOpen ? 'hidden' : '';
+      /* Force solid header when menu is open */
+      if (isOpen) {
+        header.classList.remove('awai-header--transparent');
+        header.classList.add('awai-header--solid');
+      }
+    });
+    /* Close on link click */
+    mobileNav.querySelectorAll('a').forEach(function(a) {
+      a.addEventListener('click', function() {
+        mobileNav.classList.remove('open');
+        burger.classList.remove('open');
+        burger.setAttribute('aria-expanded', 'false');
+        document.documentElement.style.overflow = '';
+      });
+    });
+  })();
+</script>
+
 {% stylesheet %}
   .awai-header {
     position: fixed;
@@ -51,14 +94,12 @@
     justify-content: space-between;
     align-items: center;
     transition: all 0.45s ease;
-    /* Default: solid frosted glass */
     background: rgba(253, 252, 250, 0.94);
     backdrop-filter: blur(18px);
     -webkit-backdrop-filter: blur(18px);
     border-bottom: 1px solid rgba(61, 56, 53, 0.03);
   }
 
-  /* Solid state (default + scroll-past-hero) */
   .awai-header .awai-header__logo {
     font-family: var(--font-heading);
     font-weight: 400;
@@ -99,38 +140,24 @@
     -webkit-backdrop-filter: none;
     border-bottom-color: transparent;
   }
-  .awai-header--transparent .awai-header__logo {
-    color: #fff;
-  }
-  .awai-header--transparent .awai-header__nav a {
-    color: rgba(255, 255, 255, 0.5);
-  }
-  .awai-header--transparent .awai-header__nav a:hover {
-    color: #fff;
-  }
-  .awai-header--transparent .awai-header__cart svg {
-    stroke: #fff;
-  }
+  .awai-header--transparent .awai-header__logo { color: #fff; }
+  .awai-header--transparent .awai-header__nav a { color: rgba(255, 255, 255, 0.5); }
+  .awai-header--transparent .awai-header__nav a:hover { color: #fff; }
+  .awai-header--transparent .awai-header__cart svg { stroke: #fff; }
+  .awai-header--transparent .awai-header__burger span { background: #fff; }
+  .awai-header--transparent .awai-header__cart-count { background: #fff; color: var(--cocoa); }
 
-  /* Solid state (explicit class after scroll) */
+  /* Solid state (after scroll) */
   .awai-header--solid {
     background: rgba(253, 252, 250, 0.94);
     backdrop-filter: blur(18px);
     -webkit-backdrop-filter: blur(18px);
     border-bottom: 1px solid rgba(61, 56, 53, 0.03);
   }
-  .awai-header--solid .awai-header__logo {
-    color: var(--cocoa);
-  }
-  .awai-header--solid .awai-header__nav a {
-    color: var(--ink-l);
-  }
-  .awai-header--solid .awai-header__nav a:hover {
-    color: var(--cocoa);
-  }
-  .awai-header--solid .awai-header__cart svg {
-    stroke: var(--cocoa);
-  }
+  .awai-header--solid .awai-header__logo { color: var(--cocoa); }
+  .awai-header--solid .awai-header__nav a { color: var(--ink-l); }
+  .awai-header--solid .awai-header__nav a:hover { color: var(--cocoa); }
+  .awai-header--solid .awai-header__cart svg { stroke: var(--cocoa); }
 
   /* Layout */
   .awai-header__right {
@@ -138,12 +165,10 @@
     align-items: center;
     gap: 22px;
   }
-
   .awai-header__nav {
     display: flex;
     gap: 22px;
   }
-
   .awai-header__cart {
     display: flex;
     align-items: center;
@@ -151,9 +176,7 @@
     transition: opacity 0.3s;
     position: relative;
   }
-  .awai-header__cart:hover {
-    opacity: 0.6;
-  }
+  .awai-header__cart:hover { opacity: 0.6; }
 
   .awai-header__cart-count {
     position: absolute;
@@ -173,15 +196,106 @@
     line-height: 1;
   }
 
-  /* Responsive */
+  /* ═══ Hamburger button ═══ */
+  .awai-header__burger {
+    display: none;
+    flex-direction: column;
+    justify-content: center;
+    gap: 5px;
+    width: 22px;
+    height: 22px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 0;
+    position: relative;
+    z-index: 110;
+  }
+  .awai-header__burger span {
+    display: block;
+    width: 100%;
+    height: 1.5px;
+    background: var(--cocoa);
+    border-radius: 1px;
+    transition: all 0.3s ease;
+    transform-origin: center;
+  }
+  .awai-header__burger.open span:first-child {
+    transform: translateY(3.25px) rotate(45deg);
+  }
+  .awai-header__burger.open span:last-child {
+    transform: translateY(-3.25px) rotate(-45deg);
+  }
+
+  /* ═══ Mobile nav overlay ═══ */
+  .awai-mobile-nav {
+    display: none;
+    position: fixed;
+    inset: 0;
+    z-index: 99;
+    background: rgba(253, 252, 250, 0.98);
+    backdrop-filter: blur(24px);
+    -webkit-backdrop-filter: blur(24px);
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.35s ease, visibility 0.35s ease;
+  }
+  .awai-mobile-nav.open {
+    opacity: 1;
+    visibility: visible;
+  }
+  .awai-mobile-nav__links {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 28px;
+  }
+  .awai-mobile-nav__links a {
+    font-family: var(--font-heading);
+    font-size: 0.62rem;
+    font-weight: 600;
+    letter-spacing: 0.35em;
+    text-transform: uppercase;
+    text-decoration: none;
+    color: var(--cocoa);
+    transition: color 0.3s;
+    opacity: 0;
+    transform: translateY(12px);
+  }
+  .awai-mobile-nav.open .awai-mobile-nav__links a {
+    animation: mobileNavIn 0.4s ease forwards;
+  }
+  .awai-mobile-nav.open .awai-mobile-nav__links a:nth-child(1) { animation-delay: 0.05s; }
+  .awai-mobile-nav.open .awai-mobile-nav__links a:nth-child(2) { animation-delay: 0.1s; }
+  .awai-mobile-nav.open .awai-mobile-nav__links a:nth-child(3) { animation-delay: 0.15s; }
+  .awai-mobile-nav.open .awai-mobile-nav__links a:nth-child(4) { animation-delay: 0.2s; }
+  .awai-mobile-nav.open .awai-mobile-nav__links a:nth-child(5) { animation-delay: 0.25s; }
+  .awai-mobile-nav__links a:hover { color: var(--ink-l); }
+
+  @keyframes mobileNavIn {
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  /* ═══ Responsive ═══ */
+  @media (max-width: 768px) {
+    .awai-header__nav {
+      display: none;
+    }
+    .awai-header__burger {
+      display: flex;
+    }
+    .awai-mobile-nav {
+      display: flex;
+    }
+  }
   @media (max-width: 600px) {
     .awai-header {
       padding: 14px 16px;
     }
     .awai-header__right {
-      gap: 14px;
-    }
-    .awai-header__nav {
       gap: 14px;
     }
   }

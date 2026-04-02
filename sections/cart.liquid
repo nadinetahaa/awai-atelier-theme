@@ -1,37 +1,280 @@
-{% comment %}
-  This section is used in the cart template to render /cart page with an
-  overview of the items in customer's cart.
+<div class="awai-cart">
+  <h1 class="awai-cart__title rv">Your Cart</h1>
 
-  https://shopify.dev/docs/storefronts/themes/architecture/templates/cart
-{% endcomment %}
+  {% if cart.item_count == 0 %}
+    <div class="awai-cart__empty rv d1">
+      <p class="awai-cart__empty-text">Your cart is empty.</p>
+      <a href="{{ routes.all_products_collection_url }}" class="btn-primary">Continue Shopping</a>
+    </div>
+  {% else %}
+    <form action="{{ routes.cart_url }}" method="post" class="awai-cart__form" id="awai-cart-form">
+      <div class="awai-cart__items">
+        {% for item in cart.items %}
+          <div class="awai-cart__item rv{% if forloop.index > 1 %} d{{ forloop.index | minus: 1 | at_most: 4 }}{% endif %}">
+            <a href="{{ item.url }}" class="awai-cart__item-img">
+              {% if item.image != blank %}
+                {{ item.image | image_url: width: 240 | image_tag: loading: 'lazy' }}
+              {% endif %}
+            </a>
+            <div class="awai-cart__item-details">
+              <a href="{{ item.url }}" class="awai-cart__item-title">{{ item.product.title }}</a>
+              {% if item.variant.title != 'Default Title' %}
+                <div class="awai-cart__item-variant">{{ item.variant.title }}</div>
+              {% endif %}
+              <div class="awai-cart__item-price">{{ item.original_price | money }}</div>
+            </div>
+            <div class="awai-cart__item-qty">
+              <div class="awai-cart__qty-stepper">
+                <button type="button" class="awai-cart__qty-btn" data-action="minus" data-key="{{ item.key }}" aria-label="Decrease">&minus;</button>
+                <input type="number" name="updates[]" value="{{ item.quantity }}" min="0" class="awai-cart__qty-val" aria-label="Quantity">
+                <button type="button" class="awai-cart__qty-btn" data-action="plus" data-key="{{ item.key }}" aria-label="Increase">+</button>
+              </div>
+            </div>
+            <div class="awai-cart__item-total">
+              {{ item.final_line_price | money }}
+            </div>
+            <a href="{{ item.url_to_remove }}" class="awai-cart__item-remove" aria-label="Remove">
+              <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M3 3l8 8M11 3l-8 8" stroke="currentColor" stroke-width="1" stroke-linecap="round"/></svg>
+            </a>
+          </div>
+        {% endfor %}
+      </div>
 
-<h1>{{ 'cart.title' | t }}</h1>
+      <div class="awai-cart__footer rv">
+        <div class="awai-cart__subtotal">
+          <span class="awai-cart__subtotal-label">Subtotal</span>
+          <span class="awai-cart__subtotal-price">{{ cart.total_price | money }}</span>
+        </div>
+        <p class="awai-cart__note">Shipping and taxes calculated at checkout.</p>
+        <button type="submit" name="checkout" class="btn-primary awai-cart__checkout">Checkout</button>
+        <a href="{{ routes.all_products_collection_url }}" class="awai-cart__continue">Continue Shopping</a>
+      </div>
+    </form>
+  {% endif %}
+</div>
 
-<form action="{{ routes.cart_url }}" method="post">
-  <table>
-    {% for item in cart.items %}
-      <tr>
-        <td>
-          {% render 'image', image: item.image, url: item.url %}
-        </td>
-        <td>
-          <p>{{ item.product.title }}</p>
-          {{ 'cart.remove' | t | link_to: item.url_to_remove }}
-        </td>
-        <td>
-          <input type="text" name="updates[]" value="{{ item.quantity }}">
-          <input type="submit" value="{{ 'cart.update' | t }}">
-        </td>
-      </tr>
-    {% endfor %}
-  </table>
+<script>
+(function() {
+  document.querySelectorAll('.awai-cart__qty-btn').forEach(function(btn) {
+    btn.addEventListener('click', function() {
+      var input = this.parentElement.querySelector('input');
+      var val = parseInt(input.value) || 0;
+      if (this.dataset.action === 'minus') {
+        input.value = Math.max(0, val - 1);
+      } else {
+        input.value = val + 1;
+      }
+      document.getElementById('awai-cart-form').submit();
+    });
+  });
+})();
+</script>
 
-  <input type="submit" name="checkout" value="{{ 'cart.checkout' | t }}">
-</form>
+{% stylesheet %}
+  .awai-cart {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 120px 28px 100px;
+  }
+  .awai-cart__title {
+    font-family: var(--font-heading);
+    font-weight: 300;
+    font-size: clamp(1.4rem, 3vw, 2rem);
+    color: var(--cocoa);
+    text-align: center;
+    margin-bottom: 48px;
+  }
+
+  /* Empty state */
+  .awai-cart__empty {
+    text-align: center;
+    padding: 48px 0;
+  }
+  .awai-cart__empty-text {
+    font-size: 0.86rem;
+    color: var(--ink-l);
+    margin-bottom: 28px;
+  }
+
+  /* Items */
+  .awai-cart__item {
+    display: grid;
+    grid-template-columns: 80px 1fr auto auto auto;
+    gap: 20px;
+    align-items: center;
+    padding: 24px 0;
+    border-bottom: 1px solid rgba(61, 56, 53, 0.06);
+  }
+  .awai-cart__item-img {
+    width: 80px;
+    aspect-ratio: 3 / 4;
+    border-radius: var(--radius-s);
+    overflow: hidden;
+    background: var(--sf);
+    display: block;
+  }
+  .awai-cart__item-img img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+  .awai-cart__item-title {
+    font-family: var(--font-heading);
+    font-weight: 500;
+    font-size: 0.82rem;
+    color: var(--cocoa);
+    text-decoration: none;
+    display: block;
+    margin-bottom: 2px;
+  }
+  .awai-cart__item-title:hover {
+    color: var(--ink-m);
+  }
+  .awai-cart__item-variant {
+    font-size: 0.7rem;
+    font-style: italic;
+    color: var(--ink-l);
+    margin-bottom: 4px;
+  }
+  .awai-cart__item-price {
+    font-family: var(--font-heading);
+    font-size: 0.56rem;
+    font-weight: 500;
+    letter-spacing: 0.06em;
+    color: var(--ink-m);
+  }
+
+  /* Quantity stepper */
+  .awai-cart__qty-stepper {
+    display: flex;
+    align-items: center;
+    border: 1px solid rgba(61, 56, 53, 0.1);
+    border-radius: 200px;
+    overflow: hidden;
+  }
+  .awai-cart__qty-btn {
+    font-family: var(--font-heading);
+    font-size: 0.68rem;
+    font-weight: 300;
+    color: var(--ink-l);
+    background: none;
+    border: none;
+    cursor: pointer;
+    width: 32px;
+    height: 36px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: color 0.2s;
+  }
+  .awai-cart__qty-btn:hover { color: var(--cocoa); }
+  .awai-cart__qty-val {
+    font-family: var(--font-heading);
+    font-size: 0.62rem;
+    font-weight: 500;
+    color: var(--cocoa);
+    width: 28px;
+    text-align: center;
+    border: none;
+    background: none;
+    padding: 0;
+    -moz-appearance: textfield;
+  }
+  .awai-cart__qty-val::-webkit-inner-spin-button,
+  .awai-cart__qty-val::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+  }
+
+  .awai-cart__item-total {
+    font-family: var(--font-heading);
+    font-weight: 500;
+    font-size: 0.82rem;
+    color: var(--cocoa);
+    min-width: 64px;
+    text-align: right;
+  }
+  .awai-cart__item-remove {
+    color: var(--ink-f);
+    transition: color 0.3s;
+    display: flex;
+  }
+  .awai-cart__item-remove:hover { color: var(--cocoa); }
+
+  /* Footer */
+  .awai-cart__footer {
+    padding: 32px 0 0;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+  }
+  .awai-cart__subtotal {
+    display: flex;
+    justify-content: space-between;
+    width: 240px;
+    margin-bottom: 8px;
+  }
+  .awai-cart__subtotal-label {
+    font-family: var(--font-heading);
+    font-size: 0.48rem;
+    font-weight: 700;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: var(--ink-f);
+  }
+  .awai-cart__subtotal-price {
+    font-family: var(--font-heading);
+    font-weight: 500;
+    font-size: 1.1rem;
+    color: var(--cocoa);
+  }
+  .awai-cart__note {
+    font-size: 0.7rem;
+    color: var(--ink-l);
+    margin-bottom: 24px;
+  }
+  .awai-cart__checkout {
+    width: 240px;
+    text-align: center;
+    margin-bottom: 12px;
+  }
+  .awai-cart__continue {
+    font-family: var(--font-heading);
+    font-size: 0.46rem;
+    font-weight: 600;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--ink-f);
+    text-decoration: none;
+    transition: color 0.3s;
+  }
+  .awai-cart__continue:hover { color: var(--cocoa); }
+
+  /* Responsive */
+  @media (max-width: 600px) {
+    .awai-cart { padding: 96px 16px 72px; }
+    .awai-cart__item {
+      grid-template-columns: 64px 1fr auto;
+      grid-template-rows: auto auto;
+      gap: 12px;
+    }
+    .awai-cart__item-img { width: 64px; }
+    .awai-cart__item-qty { grid-column: 2; grid-row: 2; }
+    .awai-cart__item-total { grid-column: 3; grid-row: 2; }
+    .awai-cart__item-remove {
+      grid-column: 3;
+      grid-row: 1;
+      justify-self: end;
+    }
+    .awai-cart__footer { align-items: stretch; }
+    .awai-cart__subtotal { width: 100%; }
+    .awai-cart__checkout { width: 100%; }
+  }
+{% endstylesheet %}
 
 {% schema %}
 {
-  "name": "t:general.cart",
+  "name": "Cart",
   "settings": []
 }
 {% endschema %}

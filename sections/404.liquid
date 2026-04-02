@@ -1,23 +1,52 @@
-{% comment %}
-  This section is used in the 404 template to render page shown when customers
-  enter an invalid store URL.
+<section class="awai-404">
+  <span class="awai-404__label rv">404</span>
+  <h1 class="awai-404__heading rv d1">This page drifted awai.</h1>
+  <p class="awai-404__text rv d2">The page you're looking for has floated off somewhere. Let's get you back to solid ground.</p>
+  <a href="{{ routes.all_products_collection_url }}" class="btn-primary rv d3">Back to Shop</a>
+</section>
 
-  https://shopify.dev/docs/storefronts/themes/architecture/templates/404
-{% endcomment %}
-
-<h1>{{ '404.title' | t }}</h1>
-
-<p>
-  {{ '404.not_found' | t }}
-</p>
-
-<a href="{{ routes.all_products_collection_url }}">
-  {{ '404.back_to_shopping' | t }}
-</a>
+{% stylesheet %}
+  .awai-404 {
+    text-align: center;
+    padding: 160px 28px 120px;
+    max-width: 520px;
+    margin: 0 auto;
+  }
+  .awai-404__label {
+    font-family: var(--font-heading);
+    font-size: 0.44rem;
+    font-weight: 700;
+    letter-spacing: 0.5em;
+    text-transform: uppercase;
+    color: var(--ink-f);
+    display: block;
+    margin-bottom: 18px;
+  }
+  .awai-404__heading {
+    font-family: var(--font-heading);
+    font-weight: 300;
+    font-size: clamp(1.8rem, 4vw, 2.8rem);
+    line-height: 1.2;
+    color: var(--cocoa);
+    margin-bottom: 18px;
+  }
+  .awai-404__text {
+    font-size: 0.86rem;
+    line-height: 1.85;
+    color: var(--ink-l);
+    margin-bottom: 32px;
+    max-width: 400px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+  @media (max-width: 600px) {
+    .awai-404 { padding: 120px 16px 80px; }
+  }
+{% endstylesheet %}
 
 {% schema %}
 {
-  "name": "t:general.404",
+  "name": "404",
   "settings": []
 }
 {% endschema %}

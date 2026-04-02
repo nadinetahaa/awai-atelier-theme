@@ -1,9 +1,10 @@
 <!doctype html>
 <html lang="{{ request.locale.iso_code }}">
   <head>
-    {% # Google Fonts: Quicksand (headings) + Plus Jakarta Sans (body) %}
+    {% # Google Fonts: Quicksand (headings) + Plus Jakarta Sans (body) — display=swap for performance %}
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Quicksand:wght@300;400;500;600;700&family=Plus+Jakarta+Sans:wght@200;300;400;500;600&display=swap">
     <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@300;400;500;600;700&family=Plus+Jakarta+Sans:wght@200;300;400;500;600&display=swap" rel="stylesheet">
 
     {% # Inlined CSS Variables %}
@@ -12,7 +13,7 @@
     {% # Load and preload the critical CSS %}
     {{ 'critical.css' | asset_url | stylesheet_tag: preload: true }}
 
-    {% # Social, title, etc. %}
+    {% # SEO: title, meta, OG, JSON-LD, favicon %}
     {% render 'meta-tags' %}
 
     {{ content_for_header }}
@@ -21,11 +22,14 @@
   <body>
     {% sections 'header-group' %}
 
-    {{ content_for_layout }}
+    <main role="main">
+      {{ content_for_layout }}
+    </main>
 
     {% sections 'footer-group' %}
 
-    <script>
+    {% # Scroll-reveal observer — deferred to not block render %}
+    <script defer>
       (function() {
         var obs = new IntersectionObserver(function(entries) {
           entries.forEach(function(entry) {
