@@ -1,0 +1,23 @@
+{
+  "sections": {
+    "hero": {
+      "type": "page-hero",
+      "settings": {
+        "label": "Contact",
+        "heading": "Say hello.",
+        "subtext": "Whether you have a question about an order, want to discuss a custom piece, or just want to tell us how a Drifter looks in your nursery \u2014 we\u2019d love to hear from you.",
+        "background_color": "#F5F1E6"
+      }
+    },
+    "form": {
+      "type": "contact-form",
+      "settings": {
+        "label": "Get in Touch",
+        "heading": "We\u2019d love to hear from you.",
+        "body": "We respond to every message personally, usually within a day or two. For order-related questions, include your order number and we\u2019ll get back to you faster.",
+        "email": "hello@awaiatelier.com"
+      }
+    }
+  },
+  "order": ["hero", "form"]
+}

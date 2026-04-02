@@ -1,0 +1,67 @@
+{
+  "sections": {
+    "hero": {
+      "type": "page-hero",
+      "settings": {
+        "label": "Our Story",
+        "heading": "Design objects from somewhere in the clouds.",
+        "subtext": "Awai Atelier is a nursery design studio. We 3D print lighting and sculpture from plant-based PLA \u2014 one piece at a time, in our studio in Houston, Texas.",
+        "background_color": "#F5F1E6"
+      }
+    },
+    "story": {
+      "type": "brand-story",
+      "settings": {
+        "label": "The Beginning",
+        "heading": "It started with a question: what would a lamp look like if it drifted in from the sky?",
+        "body": "We couldn\u2019t find nursery lighting that felt elevated without being cold, playful without being cutesy, beautiful without being disposable. So we started making it ourselves. Every Awai piece is designed in 3D, printed layer by layer from plant-based PLA, and finished by hand. The visible ridges of the printing process are left intentionally \u2014 they catch light, invite touch, and remind you that this object was built slowly and carefully, just for you.",
+        "placeholder_text": "Studio portrait"
+      },
+      "blocks": {
+        "fact_1": { "type": "fact", "settings": { "label": "Founded", "value": "2025" } },
+        "fact_2": { "type": "fact", "settings": { "label": "Studio", "value": "Houston, TX" } },
+        "fact_3": { "type": "fact", "settings": { "label": "Material", "value": "Plant-based PLA" } }
+      },
+      "block_order": ["fact_1", "fact_2", "fact_3"]
+    },
+    "process": {
+      "type": "about-process",
+      "settings": {
+        "label": "The Process",
+        "heading": "From file to finished, layer by layer."
+      },
+      "blocks": {
+        "step_1": { "type": "step", "settings": { "title": "Design", "description": "Each shape is modeled in 3D, refined over dozens of iterations until the proportions feel like something that could actually float.", "placeholder_color": "vanille-s", "placeholder_text": "3D modeling" } },
+        "step_2": { "type": "step", "settings": { "title": "Slice", "description": "The model is sliced into thousands of layers, each one mapped into a precise toolpath for the printer to trace.", "placeholder_color": "cloud-s", "placeholder_text": "Slicing software" } },
+        "step_3": { "type": "step", "settings": { "title": "Print", "description": "Plant-based PLA is fed through a heated nozzle, building the piece layer by layer over 10 to 14 hours on a single Bambu Lab printer.", "placeholder_color": "sage-s", "placeholder_text": "Printing" } },
+        "step_4": { "type": "step", "settings": { "title": "Finish", "description": "Each piece is inspected, gently cleaned, fitted with hardware if it\u2019s a lamp, and wrapped in kraft tissue for shipping.", "placeholder_color": "lila-s", "placeholder_text": "Finishing" } }
+      },
+      "block_order": ["step_1", "step_2", "step_3", "step_4"]
+    },
+    "philosophy": {
+      "type": "page-richtext",
+      "settings": {
+        "label": "Design Philosophy",
+        "heading": "Sculptural, never cute. Warm, never cold.",
+        "body": "<p>We believe nurseries deserve the same design attention as any other room in the house. The objects children grow up around shape the way they see the world. We want them to see craft, texture, and light \u2014 things made with care, from materials that don\u2019t compromise.</p><p>Every Awai piece is designed to feel at home in a gallery and in a child\u2019s room. That tension is what makes the work interesting to us \u2014 and, we think, what makes it worth living with.</p>",
+        "background": "none"
+      }
+    },
+    "sustainability": {
+      "type": "product-sustainability",
+      "settings": {
+        "label": "Made Mindfully",
+        "heading": "Zero dead stock. Zero material waste.",
+        "body": "Every piece is printed to order in our studio. No warehouses of unsold inventory. No excess production. The PLA we use is biosourced \u2014 derived from plant starch, not petroleum. It\u2019s the gentlest way we know to make something beautiful."
+      },
+      "blocks": {
+        "fact_1": { "type": "fact", "settings": { "title": "Plant-based", "description": "PLA derived from corn starch. Biodegradable under industrial composting." } },
+        "fact_2": { "type": "fact", "settings": { "title": "Made to order", "description": "Each piece is printed only after you place your order. Nothing sits in a warehouse." } },
+        "fact_3": { "type": "fact", "settings": { "title": "Local production", "description": "Designed and fabricated in-house. No overseas factories. No container ships." } },
+        "fact_4": { "type": "fact", "settings": { "title": "Minimal packaging", "description": "Kraft paper, tissue, and a sticker. Nothing you\u2019d feel guilty about." } }
+      },
+      "block_order": ["fact_1", "fact_2", "fact_3", "fact_4"]
+    }
+  },
+  "order": ["hero", "story", "process", "philosophy", "sustainability"]
+}

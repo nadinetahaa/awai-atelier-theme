@@ -1,0 +1,106 @@
+<section class="pg-hero full-width" style="{% if section.settings.background_color != blank %}background: {{ section.settings.background_color }};{% endif %}">
+  <div class="pg-hero__inner">
+    {% if section.settings.label != blank %}
+      <span class="pg-hero__label rv">{{ section.settings.label }}</span>
+    {% endif %}
+    {% if section.settings.heading != blank %}
+      <h1 class="pg-hero__heading rv d1">{{ section.settings.heading }}</h1>
+    {% endif %}
+    {% if section.settings.subtext != blank %}
+      <p class="pg-hero__sub rv d2">{{ section.settings.subtext }}</p>
+    {% endif %}
+    {% if section.settings.cta_text != blank %}
+      <a href="{{ section.settings.cta_link }}" class="btn-primary pg-hero__cta rv d3">{{ section.settings.cta_text }}</a>
+    {% endif %}
+  </div>
+</section>
+
+{% stylesheet %}
+  .pg-hero {
+    background: var(--vanille-s);
+    padding-top: 120px;
+    padding-bottom: 80px;
+  }
+  .pg-hero__inner {
+    max-width: 640px;
+    margin: 0 auto;
+    padding: 0 28px;
+    text-align: center;
+  }
+  .pg-hero__label {
+    font-family: var(--font-heading);
+    font-size: 0.44rem;
+    font-weight: 700;
+    letter-spacing: 0.45em;
+    text-transform: uppercase;
+    color: var(--ink-f);
+    margin-bottom: 18px;
+    display: block;
+  }
+  .pg-hero__heading {
+    font-family: var(--font-heading);
+    font-weight: 300;
+    font-size: clamp(1.8rem, 4vw, 2.8rem);
+    line-height: 1.2;
+    color: var(--cocoa);
+    margin-bottom: 18px;
+  }
+  .pg-hero__sub {
+    font-size: 0.86rem;
+    line-height: 1.85;
+    color: var(--ink-l);
+    max-width: 480px;
+    margin: 0 auto 28px;
+  }
+  .pg-hero__cta {
+    margin-top: 4px;
+  }
+  @media (max-width: 600px) {
+    .pg-hero {
+      padding-top: 96px;
+      padding-bottom: 56px;
+    }
+    .pg-hero__inner {
+      padding: 0 16px;
+    }
+  }
+{% endstylesheet %}
+
+{% schema %}
+{
+  "name": "Page Hero",
+  "settings": [
+    {
+      "type": "text",
+      "id": "label",
+      "label": "Tag label"
+    },
+    {
+      "type": "textarea",
+      "id": "heading",
+      "label": "Heading"
+    },
+    {
+      "type": "textarea",
+      "id": "subtext",
+      "label": "Subtext"
+    },
+    {
+      "type": "text",
+      "id": "cta_text",
+      "label": "Button text"
+    },
+    {
+      "type": "url",
+      "id": "cta_link",
+      "label": "Button link"
+    },
+    {
+      "type": "color",
+      "id": "background_color",
+      "label": "Background color"
+    }
+  ],
+  "presets": [{ "name": "Page Hero" }]
+}
+{% endschema %}

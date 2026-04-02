@@ -1,0 +1,50 @@
+{
+  "sections": {
+    "hero": {
+      "type": "page-hero",
+      "settings": {
+        "label": "Support",
+        "heading": "Shipping, returns, and everything in between.",
+        "subtext": "Because every Drifter is printed to order, our process is a little different from what you might be used to. Here\u2019s how it works.",
+        "background_color": "#F5F1E6"
+      }
+    },
+    "processing": {
+      "type": "page-richtext",
+      "settings": {
+        "label": "Processing Time",
+        "heading": "Made to order means made for you.",
+        "body": "<p>Every Drifter is 3D printed after you place your order. There is no warehouse, no shelf of pre-made inventory. Your piece is built layer by layer in our Houston studio, usually over the course of 10 to 14 hours of print time. From the moment you order to the moment it ships, expect 5 to 10 business days. We know that\u2019s longer than a next-day delivery, but we think the wait is part of what makes it worth having. You\u2019ll receive a confirmation email when your order is placed and a second email with tracking information when it ships.</p>",
+        "background": "none"
+      }
+    },
+    "shipping": {
+      "type": "page-richtext",
+      "settings": {
+        "label": "Shipping",
+        "heading": "We ship free within the United States.",
+        "body": "<p>All domestic orders ship complimentary via USPS Priority Mail or UPS Ground, depending on the size of your order. Most packages arrive within 2 to 5 business days after they ship. We currently ship to all 50 US states. International shipping is not yet available, but we\u2019re working on it. If you\u2019re outside the US and interested in a piece, reach out to us directly and we\u2019ll do our best to find a way.</p>",
+        "background": "surface"
+      }
+    },
+    "returns": {
+      "type": "page-richtext",
+      "settings": {
+        "label": "Returns",
+        "heading": "We want you to love what you receive.",
+        "body": "<p>If something isn\u2019t right, let us know within 14 days of delivery. We accept returns on unused, undamaged items in their original packaging. Because each piece is made to order, we can\u2019t offer exchanges on custom or personalized orders, but we\u2019ll always work with you to make things right. If your Drifter arrives damaged during transit, send us a photo and we\u2019ll replace it at no charge. Reach out to us at hello@awaiatelier.com and we\u2019ll take care of you.</p>",
+        "background": "none"
+      }
+    },
+    "care": {
+      "type": "page-richtext",
+      "settings": {
+        "label": "Care",
+        "heading": "Looking after your Drifter.",
+        "body": "<p>PLA is a durable, plant-based material, but it does best away from sustained direct heat. Keep your Drifter away from radiators, heating vents, and prolonged direct sunlight through glass. To clean, wipe gently with a soft, dry cloth. The ribbed texture of the surface is designed to catch light beautifully, but it can also catch dust over time. A soft brush or compressed air works well for the crevices. The lamp version uses a low-heat LED module, so the fixture itself stays cool to the touch and is safe for nursery use.</p>",
+        "background": "surface"
+      }
+    }
+  },
+  "order": ["hero", "processing", "shipping", "returns", "care"]
+}

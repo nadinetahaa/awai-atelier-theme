@@ -1,0 +1,192 @@
+<section class="about-process full-width">
+  <div class="about-process__inner">
+    {% if section.settings.label != blank %}
+      <span class="about-process__label rv">{{ section.settings.label }}</span>
+    {% endif %}
+    {% if section.settings.heading != blank %}
+      <h2 class="about-process__heading rv d1">{{ section.settings.heading }}</h2>
+    {% endif %}
+
+    <div class="about-process__steps">
+      {% for block in section.blocks %}
+        <div class="about-process__step rv d{{ forloop.index }}" {{ block.shopify_attributes }}>
+          <div class="about-process__step-visual">
+            {% if block.settings.image != blank %}
+              {{ block.settings.image | image_url: width: 600 | image_tag: loading: 'lazy' }}
+            {% else %}
+              <div class="about-process__step-ph" style="background: var(--{{ block.settings.placeholder_color | default: 'vanille-s' }})">
+                <span>{{ block.settings.placeholder_text | default: 'Process image' }}</span>
+              </div>
+            {% endif %}
+          </div>
+          <div class="about-process__step-num">{{ forloop.index | prepend: '0' | slice: -2, 2 }}</div>
+          {% if block.settings.title != blank %}
+            <h3 class="about-process__step-title">{{ block.settings.title }}</h3>
+          {% endif %}
+          {% if block.settings.description != blank %}
+            <p class="about-process__step-desc">{{ block.settings.description }}</p>
+          {% endif %}
+        </div>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+
+{% stylesheet %}
+  .about-process {
+    background: var(--sf);
+    padding: 100px 28px;
+  }
+  .about-process__inner {
+    max-width: 1100px;
+    margin: 0 auto;
+  }
+  .about-process__label {
+    font-family: var(--font-heading);
+    font-size: 0.44rem;
+    font-weight: 700;
+    letter-spacing: 0.4em;
+    text-transform: uppercase;
+    color: var(--ink-f);
+    margin-bottom: 14px;
+    display: block;
+    text-align: center;
+  }
+  .about-process__heading {
+    font-family: var(--font-heading);
+    font-weight: 300;
+    font-size: clamp(1.4rem, 3vw, 2rem);
+    line-height: 1.35;
+    color: var(--cocoa);
+    margin-bottom: 48px;
+    text-align: center;
+  }
+  .about-process__steps {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: 24px;
+  }
+  .about-process__step {
+    text-align: center;
+  }
+  .about-process__step-visual {
+    aspect-ratio: 1 / 1;
+    border-radius: var(--radius-card);
+    overflow: hidden;
+    margin-bottom: 20px;
+    background: var(--vanille-s);
+  }
+  .about-process__step-visual img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+  .about-process__step-ph {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .about-process__step-ph span {
+    font-family: var(--font-heading);
+    font-size: 0.38rem;
+    font-weight: 500;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: rgba(61, 56, 53, 0.18);
+  }
+  .about-process__step-num {
+    font-family: var(--font-heading);
+    font-size: 0.42rem;
+    font-weight: 700;
+    letter-spacing: 0.3em;
+    color: var(--ink-f);
+    margin-bottom: 8px;
+  }
+  .about-process__step-title {
+    font-family: var(--font-heading);
+    font-weight: 500;
+    font-size: 0.86rem;
+    color: var(--cocoa);
+    margin-bottom: 6px;
+  }
+  .about-process__step-desc {
+    font-size: 0.76rem;
+    line-height: 1.7;
+    color: var(--ink-l);
+    max-width: 280px;
+    margin: 0 auto;
+  }
+  @media (max-width: 600px) {
+    .about-process { padding: 72px 16px; }
+  }
+{% endstylesheet %}
+
+{% schema %}
+{
+  "name": "Process Steps",
+  "settings": [
+    {
+      "type": "text",
+      "id": "label",
+      "label": "Section label",
+      "default": "The Process"
+    },
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "From file to finished, layer by layer."
+    }
+  ],
+  "blocks": [
+    {
+      "type": "step",
+      "name": "Step",
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Image"
+        },
+        {
+          "type": "text",
+          "id": "placeholder_color",
+          "label": "Placeholder color variable",
+          "default": "vanille-s"
+        },
+        {
+          "type": "text",
+          "id": "placeholder_text",
+          "label": "Placeholder text",
+          "default": "Process image"
+        },
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Title",
+          "default": "Design"
+        },
+        {
+          "type": "textarea",
+          "id": "description",
+          "label": "Description",
+          "default": "Each shape is modeled in 3D, refined over dozens of iterations until the proportions feel right."
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Process Steps",
+      "blocks": [
+        { "type": "step", "settings": { "title": "Design", "description": "Each shape is modeled in 3D, refined over dozens of iterations until the proportions feel right.", "placeholder_color": "vanille-s", "placeholder_text": "3D modeling" } },
+        { "type": "step", "settings": { "title": "Slice", "description": "The model is sliced into thousands of layers, each one mapped into a toolpath for the printer to follow.", "placeholder_color": "cloud-s", "placeholder_text": "Slicing software" } },
+        { "type": "step", "settings": { "title": "Print", "description": "Plant-based PLA is fed through a heated nozzle, building the piece layer by layer over 10 to 14 hours.", "placeholder_color": "sage-s", "placeholder_text": "Printing process" } },
+        { "type": "step", "settings": { "title": "Finish", "description": "Each piece is inspected, gently cleaned, fitted with hardware if needed, and wrapped for shipping.", "placeholder_color": "lila-s", "placeholder_text": "Final inspection" } }
+      ]
+    }
+  ]
+}
+{% endschema %}

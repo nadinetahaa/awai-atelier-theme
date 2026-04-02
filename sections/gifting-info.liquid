@@ -1,0 +1,112 @@
+<section class="gift-info full-width">
+  <div class="gift-info__inner">
+    {% for block in section.blocks %}
+      <div class="gift-info__card rv d{{ forloop.index }}" {{ block.shopify_attributes }}>
+        {% if block.settings.icon == 'gift' %}
+          <svg class="gift-info__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2"><path d="M20 12v10H4V12"/><path d="M2 7h20v5H2z"/><path d="M12 22V7"/><path d="M12 7H7.5a2.5 2.5 0 0 1 0-5C11 2 12 7 12 7z"/><path d="M12 7h4.5a2.5 2.5 0 0 0 0-5C13 2 12 7 12 7z"/></svg>
+        {% elsif block.settings.icon == 'heart' %}
+          <svg class="gift-info__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
+        {% elsif block.settings.icon == 'package' %}
+          <svg class="gift-info__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2"><path d="M16.5 9.4l-9-5.19"/><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/><path d="M3.27 6.96L12 12.01l8.73-5.05"/><path d="M12 22.08V12"/></svg>
+        {% endif %}
+        {% if block.settings.title != blank %}
+          <h3 class="gift-info__title">{{ block.settings.title }}</h3>
+        {% endif %}
+        {% if block.settings.text != blank %}
+          <p class="gift-info__text">{{ block.settings.text }}</p>
+        {% endif %}
+      </div>
+    {% endfor %}
+  </div>
+</section>
+
+{% stylesheet %}
+  .gift-info {
+    background: var(--sf);
+    padding: 80px 28px;
+  }
+  .gift-info__inner {
+    max-width: 1100px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 24px;
+  }
+  .gift-info__card {
+    background: var(--wh);
+    border-radius: var(--radius-card);
+    padding: 32px;
+    border: 1px solid rgba(61, 56, 53, 0.04);
+    text-align: center;
+  }
+  .gift-info__icon {
+    width: 28px;
+    height: 28px;
+    color: var(--ink-f);
+    margin: 0 auto 16px;
+    display: block;
+  }
+  .gift-info__title {
+    font-family: var(--font-heading);
+    font-weight: 500;
+    font-size: 0.86rem;
+    color: var(--cocoa);
+    margin-bottom: 8px;
+  }
+  .gift-info__text {
+    font-size: 0.76rem;
+    line-height: 1.75;
+    color: var(--ink-l);
+  }
+  @media (max-width: 600px) {
+    .gift-info { padding: 56px 16px; }
+  }
+{% endstylesheet %}
+
+{% schema %}
+{
+  "name": "Gifting Info",
+  "settings": [],
+  "blocks": [
+    {
+      "type": "card",
+      "name": "Info Card",
+      "settings": [
+        {
+          "type": "select",
+          "id": "icon",
+          "label": "Icon",
+          "options": [
+            { "value": "gift", "label": "Gift" },
+            { "value": "heart", "label": "Heart" },
+            { "value": "package", "label": "Package" }
+          ],
+          "default": "gift"
+        },
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Title",
+          "default": "Gift-ready packaging"
+        },
+        {
+          "type": "textarea",
+          "id": "text",
+          "label": "Description",
+          "default": "Every Drifter ships wrapped in kraft tissue, sealed with a hand-stamped Awai sticker. No extra gift wrap needed."
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Gifting Info",
+      "blocks": [
+        { "type": "card", "settings": { "icon": "gift", "title": "Gift-ready packaging", "text": "Every Drifter ships wrapped in kraft tissue, sealed with a hand-stamped Awai sticker. No extra gift wrap needed." } },
+        { "type": "card", "settings": { "icon": "heart", "title": "Baby shower favorite", "text": "The Drifter is the gift that makes the room. Parents tell us it's the piece everyone asks about when they visit the nursery." } },
+        { "type": "card", "settings": { "icon": "package", "title": "Include a note", "text": "Add a personalized message at checkout. We'll tuck a handwritten note card inside the box on your behalf." } }
+      ]
+    }
+  ]
+}
+{% endschema %}

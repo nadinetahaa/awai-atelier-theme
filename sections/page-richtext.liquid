@@ -1,0 +1,112 @@
+<section class="pg-richtext{% if section.settings.background == 'surface' %} pg-richtext--surface{% endif %}{% if section.settings.background == 'vanille' %} pg-richtext--vanille{% endif %}">
+  <div class="pg-richtext__inner{% if section.settings.wide %} pg-richtext__inner--wide{% endif %}">
+    {% if section.settings.label != blank %}
+      <span class="pg-richtext__label rv">{{ section.settings.label }}</span>
+    {% endif %}
+    {% if section.settings.heading != blank %}
+      <h2 class="pg-richtext__heading rv d1">{{ section.settings.heading }}</h2>
+    {% endif %}
+    {% if section.settings.body != blank %}
+      <div class="pg-richtext__body rv d2">{{ section.settings.body }}</div>
+    {% endif %}
+  </div>
+</section>
+
+{% stylesheet %}
+  .pg-richtext {
+    padding: 100px 28px;
+  }
+  .pg-richtext--surface {
+    background: var(--sf);
+  }
+  .pg-richtext--vanille {
+    background: var(--vanille-s);
+  }
+  .pg-richtext__inner {
+    max-width: 580px;
+    margin: 0 auto;
+  }
+  .pg-richtext__inner--wide {
+    max-width: 800px;
+  }
+  .pg-richtext__label {
+    font-family: var(--font-heading);
+    font-size: 0.44rem;
+    font-weight: 700;
+    letter-spacing: 0.4em;
+    text-transform: uppercase;
+    color: var(--ink-f);
+    margin-bottom: 16px;
+    display: block;
+  }
+  .pg-richtext__heading {
+    font-family: var(--font-heading);
+    font-weight: 300;
+    font-size: clamp(1.4rem, 3vw, 2rem);
+    line-height: 1.35;
+    color: var(--cocoa);
+    margin-bottom: 24px;
+  }
+  .pg-richtext__body {
+    font-size: 0.86rem;
+    line-height: 1.9;
+    color: var(--ink-m);
+  }
+  .pg-richtext__body p + p {
+    margin-top: 20px;
+  }
+  .pg-richtext__body h3 {
+    font-family: var(--font-heading);
+    font-weight: 500;
+    font-size: 1rem;
+    color: var(--cocoa);
+    margin-top: 36px;
+    margin-bottom: 12px;
+  }
+  @media (max-width: 600px) {
+    .pg-richtext {
+      padding: 72px 16px;
+    }
+  }
+{% endstylesheet %}
+
+{% schema %}
+{
+  "name": "Rich Text",
+  "settings": [
+    {
+      "type": "text",
+      "id": "label",
+      "label": "Section label"
+    },
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading"
+    },
+    {
+      "type": "richtext",
+      "id": "body",
+      "label": "Body text"
+    },
+    {
+      "type": "select",
+      "id": "background",
+      "label": "Background",
+      "options": [
+        { "value": "none", "label": "None" },
+        { "value": "surface", "label": "Surface (#F7F5F1)" },
+        { "value": "vanille", "label": "Vanille Soft (#F5F1E6)" }
+      ],
+      "default": "none"
+    },
+    {
+      "type": "checkbox",
+      "id": "wide",
+      "label": "Wide layout (800px)",
+      "default": false
+    }
+  ],
+  "presets": [{ "name": "Rich Text" }]
+}
+{% endschema %}

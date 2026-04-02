@@ -1,0 +1,284 @@
+<section class="contact-section">
+  <div class="contact-section__inner">
+    <div class="contact-section__info">
+      {% if section.settings.label != blank %}
+        <span class="contact-section__label rv">{{ section.settings.label }}</span>
+      {% endif %}
+      {% if section.settings.heading != blank %}
+        <h2 class="contact-section__heading rv d1">{{ section.settings.heading }}</h2>
+      {% endif %}
+      {% if section.settings.body != blank %}
+        <p class="contact-section__body rv d2">{{ section.settings.body }}</p>
+      {% endif %}
+
+      {% if section.settings.email != blank %}
+        <div class="contact-section__detail rv d3">
+          <span class="contact-section__detail-label">Email</span>
+          <a href="mailto:{{ section.settings.email }}" class="contact-section__detail-value">{{ section.settings.email }}</a>
+        </div>
+      {% endif %}
+
+      {% if section.settings.social_tiktok != blank or section.settings.social_instagram != blank or section.settings.social_pinterest != blank %}
+        <div class="contact-section__social rv d4">
+          <span class="contact-section__detail-label">Follow along</span>
+          <div class="contact-section__social-links">
+            {% if section.settings.social_tiktok != blank %}
+              <a href="{{ section.settings.social_tiktok }}" target="_blank" rel="noopener">TikTok</a>
+            {% endif %}
+            {% if section.settings.social_instagram != blank %}
+              <a href="{{ section.settings.social_instagram }}" target="_blank" rel="noopener">Instagram</a>
+            {% endif %}
+            {% if section.settings.social_pinterest != blank %}
+              <a href="{{ section.settings.social_pinterest }}" target="_blank" rel="noopener">Pinterest</a>
+            {% endif %}
+          </div>
+        </div>
+      {% endif %}
+    </div>
+
+    <div class="contact-section__form rv d2">
+      {% form 'contact' %}
+        {% if form.posted_successfully? %}
+          <div class="contact-section__success">
+            <p>Thank you for reaching out. We'll get back to you within a day or two.</p>
+          </div>
+        {% endif %}
+
+        {% if form.errors %}
+          <div class="contact-section__errors">
+            {{ form.errors | default_errors }}
+          </div>
+        {% endif %}
+
+        <div class="contact-field">
+          <label for="contact-name">Name</label>
+          <input type="text" id="contact-name" name="contact[name]" required>
+        </div>
+
+        <div class="contact-field">
+          <label for="contact-email">Email</label>
+          <input type="email" id="contact-email" name="contact[email]" required autocomplete="email">
+        </div>
+
+        <div class="contact-field">
+          <label for="contact-subject">Subject</label>
+          <input type="text" id="contact-subject" name="contact[subject]">
+        </div>
+
+        <div class="contact-field">
+          <label for="contact-body">Message</label>
+          <textarea id="contact-body" name="contact[body]" rows="6" required></textarea>
+        </div>
+
+        <button type="submit" class="btn-primary contact-submit">Send Message</button>
+      {% endform %}
+    </div>
+  </div>
+</section>
+
+{% stylesheet %}
+  .contact-section__inner {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 100px 28px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 80px;
+    align-items: start;
+  }
+  .contact-section__label {
+    font-family: var(--font-heading);
+    font-size: 0.44rem;
+    font-weight: 700;
+    letter-spacing: 0.4em;
+    text-transform: uppercase;
+    color: var(--ink-f);
+    margin-bottom: 14px;
+    display: block;
+  }
+  .contact-section__heading {
+    font-family: var(--font-heading);
+    font-weight: 300;
+    font-size: clamp(1.4rem, 3vw, 2rem);
+    line-height: 1.35;
+    color: var(--cocoa);
+    margin-bottom: 18px;
+  }
+  .contact-section__body {
+    font-size: 0.86rem;
+    line-height: 1.85;
+    color: var(--ink-m);
+    margin-bottom: 36px;
+  }
+  .contact-section__detail {
+    margin-bottom: 24px;
+  }
+  .contact-section__detail-label {
+    font-family: var(--font-heading);
+    font-size: 0.4rem;
+    font-weight: 700;
+    letter-spacing: 0.35em;
+    text-transform: uppercase;
+    color: var(--ink-f);
+    display: block;
+    margin-bottom: 6px;
+  }
+  .contact-section__detail-value {
+    font-family: var(--font-heading);
+    font-size: 0.82rem;
+    font-weight: 400;
+    color: var(--cocoa);
+    text-decoration: none;
+    transition: color 0.3s;
+  }
+  .contact-section__detail-value:hover {
+    color: var(--ink-m);
+  }
+  .contact-section__social {
+    margin-top: 8px;
+  }
+  .contact-section__social-links {
+    display: flex;
+    gap: 16px;
+    margin-top: 6px;
+  }
+  .contact-section__social-links a {
+    font-family: var(--font-heading);
+    font-size: 0.46rem;
+    font-weight: 600;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--ink-f);
+    text-decoration: none;
+    transition: color 0.3s;
+  }
+  .contact-section__social-links a:hover {
+    color: var(--cocoa);
+  }
+
+  /* Form */
+  .contact-section__form {
+    background: var(--sf);
+    border-radius: var(--radius-section);
+    padding: 40px;
+  }
+  .contact-field {
+    margin-bottom: 20px;
+  }
+  .contact-field label {
+    font-family: var(--font-heading);
+    font-size: 0.42rem;
+    font-weight: 700;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: var(--ink-f);
+    display: block;
+    margin-bottom: 6px;
+  }
+  .contact-field input,
+  .contact-field textarea {
+    width: 100%;
+    padding: 12px 16px;
+    border-radius: var(--radius-s);
+    border: 1px solid rgba(61, 56, 53, 0.1);
+    background: var(--wh);
+    font-family: var(--font-body);
+    font-size: 0.82rem;
+    font-weight: 300;
+    color: var(--cocoa);
+    outline: none;
+    transition: border-color 0.3s;
+    resize: vertical;
+  }
+  .contact-field input:focus,
+  .contact-field textarea:focus {
+    border-color: var(--ink-l);
+  }
+  .contact-field input::placeholder,
+  .contact-field textarea::placeholder {
+    color: var(--ink-f);
+  }
+  .contact-submit {
+    width: 100%;
+    margin-top: 4px;
+  }
+  .contact-section__success {
+    background: var(--sage-s);
+    border-radius: var(--radius-s);
+    padding: 16px 20px;
+    margin-bottom: 20px;
+  }
+  .contact-section__success p {
+    font-size: 0.82rem;
+    color: var(--cocoa);
+    line-height: 1.6;
+  }
+  .contact-section__errors {
+    background: var(--blush-s);
+    border-radius: var(--radius-s);
+    padding: 16px 20px;
+    margin-bottom: 20px;
+    font-size: 0.82rem;
+    color: var(--cocoa);
+    line-height: 1.6;
+  }
+
+  @media (max-width: 800px) {
+    .contact-section__inner {
+      grid-template-columns: 1fr;
+      gap: 48px;
+    }
+  }
+  @media (max-width: 600px) {
+    .contact-section__inner { padding: 72px 16px; }
+    .contact-section__form { padding: 28px 20px; }
+  }
+{% endstylesheet %}
+
+{% schema %}
+{
+  "name": "Contact Form",
+  "settings": [
+    {
+      "type": "text",
+      "id": "label",
+      "label": "Section label",
+      "default": "Get in Touch"
+    },
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "We'd love to hear from you."
+    },
+    {
+      "type": "textarea",
+      "id": "body",
+      "label": "Body text",
+      "default": "Whether you have a question about an order, want to talk about a custom piece, or just want to say hello — we're here."
+    },
+    {
+      "type": "text",
+      "id": "email",
+      "label": "Email address",
+      "default": "hello@awaiatelier.com"
+    },
+    {
+      "type": "url",
+      "id": "social_tiktok",
+      "label": "TikTok URL"
+    },
+    {
+      "type": "url",
+      "id": "social_instagram",
+      "label": "Instagram URL"
+    },
+    {
+      "type": "url",
+      "id": "social_pinterest",
+      "label": "Pinterest URL"
+    }
+  ],
+  "presets": [{ "name": "Contact Form" }]
+}
+{% endschema %}
