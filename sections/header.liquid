@@ -1,4 +1,8 @@
-<header class="awai-header full-width{% if section.settings.transparent %} awai-header--transparent{% endif %}" id="awai-header">
+{%- assign is_transparent = false -%}
+{%- if section.settings.transparent and request.page_type == 'index' -%}
+  {%- assign is_transparent = true -%}
+{%- endif -%}
+<header class="awai-header full-width{% if is_transparent %} awai-header--transparent{% endif %}" id="awai-header">
   <a href="{{ routes.root_url }}" class="awai-header__logo">awai</a>
 
   <div class="awai-header__right">
@@ -20,7 +24,7 @@
   </div>
 </header>
 
-{% if section.settings.transparent %}
+{% if is_transparent %}
 <script>
   (function() {
     var hdr = document.getElementById('awai-header');
