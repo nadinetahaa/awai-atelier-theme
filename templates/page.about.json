@@ -18,6 +18,12 @@
         "background_color": "#F5F1E6"
       }
     },
+    "studio_image": {
+      "type": "about-image",
+      "settings": {
+        "placeholder_text": "Studio \u2014 Houston, TX"
+      }
+    },
     "story": {
       "type": "brand-story",
       "settings": {
@@ -72,5 +78,5 @@
       "block_order": ["fact_1", "fact_2", "fact_3", "fact_4"]
     }
   },
-  "order": ["hero", "story", "process", "philosophy", "sustainability"]
+  "order": ["hero", "studio_image", "story", "process", "philosophy", "sustainability"]
 }

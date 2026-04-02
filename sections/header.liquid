@@ -3,7 +3,13 @@
   {%- assign is_transparent = true -%}
 {%- endif -%}
 <header class="awai-header full-width{% if is_transparent %} awai-header--transparent{% endif %}" id="awai-header">
-  <a href="{{ routes.root_url }}" class="awai-header__logo">awai</a>
+  <a href="{{ routes.root_url }}" class="awai-header__logo">
+    {%- if section.settings.logo != blank -%}
+      {{ section.settings.logo | image_url: height: 48 | image_tag: class: 'awai-header__logo-img', loading: 'eager' }}
+    {%- else -%}
+      <span class="awai-header__logo-text">awai</span>
+    {%- endif -%}
+  </a>
 
   <div class="awai-header__right">
     <nav class="awai-header__nav" id="awai-nav">
@@ -101,13 +107,24 @@
   }
 
   .awai-header .awai-header__logo {
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    transition: opacity 0.4s;
+  }
+  .awai-header__logo-text {
     font-family: var(--font-heading);
     font-weight: 400;
     font-size: 1.05rem;
     letter-spacing: 0.08em;
     color: var(--cocoa);
-    text-decoration: none;
     transition: color 0.4s;
+  }
+  .awai-header__logo-img {
+    height: 22px;
+    width: auto;
+    display: block;
+    transition: filter 0.4s;
   }
 
   .awai-header .awai-header__nav a {
@@ -140,7 +157,8 @@
     -webkit-backdrop-filter: none;
     border-bottom-color: transparent;
   }
-  .awai-header--transparent .awai-header__logo { color: #fff; }
+  .awai-header--transparent .awai-header__logo-text { color: #fff; }
+  .awai-header--transparent .awai-header__logo-img { filter: brightness(0) invert(1); }
   .awai-header--transparent .awai-header__nav a { color: rgba(255, 255, 255, 0.5); }
   .awai-header--transparent .awai-header__nav a:hover { color: #fff; }
   .awai-header--transparent .awai-header__cart svg { stroke: #fff; }
@@ -154,7 +172,8 @@
     -webkit-backdrop-filter: blur(18px);
     border-bottom: 1px solid rgba(61, 56, 53, 0.03);
   }
-  .awai-header--solid .awai-header__logo { color: var(--cocoa); }
+  .awai-header--solid .awai-header__logo-text { color: var(--cocoa); }
+  .awai-header--solid .awai-header__logo-img { filter: none; }
   .awai-header--solid .awai-header__nav a { color: var(--ink-l); }
   .awai-header--solid .awai-header__nav a:hover { color: var(--cocoa); }
   .awai-header--solid .awai-header__cart svg { stroke: var(--cocoa); }
@@ -305,6 +324,12 @@
 {
   "name": "Header",
   "settings": [
+    {
+      "type": "image_picker",
+      "id": "logo",
+      "label": "Logo image",
+      "info": "Upload a logo image. Falls back to text 'awai' if empty."
+    },
     {
       "type": "link_list",
       "id": "menu",

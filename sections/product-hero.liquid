@@ -43,10 +43,16 @@
       <span class="pdp-hero__collection rv">{{ section.settings.collection_label }}</span>
     {% endif %}
 
-    <h1 class="pdp-hero__title rv d1">{{ product.title }}.</h1>
+    {%- comment -%}
+      Title shows the base product name (without " — Lamp" / " — Sculpture").
+      The type goes in the subtitle line.
+    {%- endcomment -%}
+    {%- assign title_parts = product.title | split: ' — ' -%}
+    <h1 class="pdp-hero__title rv d1">{{ title_parts.first }}.</h1>
 
-    {% if section.settings.subtitle != blank %}
-      <p class="pdp-hero__subtitle rv d2">{{ section.settings.subtitle }}</p>
+    {%- assign product_type_name = title_parts.last | default: section.settings.subtitle -%}
+    {% if product_type_name != blank %}
+      <p class="pdp-hero__subtitle rv d2">Hot Air Balloon {{ product_type_name }}</p>
     {% endif %}
 
     {% if product.description != blank %}
@@ -242,7 +248,11 @@
       setTimeout(function() {
         cartBtn.disabled = false;
         updateUI();
-      }, 1200);
+        /* Reload page to update cart drawer contents, then open it */
+        var url = new URL(window.location);
+        url.searchParams.set('cart_open', '1');
+        window.location = url.toString();
+      }, 600);
     })
     .catch(function() {
       cartBtn.textContent = 'Error';
@@ -410,6 +420,7 @@
 
   .pdp-hero__tagline {
     font-size: 0.72rem;
+    font-weight: 300;
     line-height: 1.85;
     color: var(--ink-l);
     max-width: 440px;

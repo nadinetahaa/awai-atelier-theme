@@ -3,7 +3,13 @@
     <div class="awai-footer__top">
       <!-- Brand + Newsletter -->
       <div class="awai-footer__brand-col">
-        <div class="awai-footer__brand">awai</div>
+        <a href="{{ routes.root_url }}" class="awai-footer__brand">
+          {%- if section.settings.logo != blank -%}
+            {{ section.settings.logo | image_url: height: 36 | image_tag: class: 'awai-footer__logo-img', loading: 'lazy' }}
+          {%- else -%}
+            <span class="awai-footer__logo-text">awai</span>
+          {%- endif -%}
+        </a>
         <p class="awai-footer__desc">{{ section.settings.description }}</p>
         {% if section.settings.show_newsletter %}
           {% form 'customer', class: 'awai-footer__nl' %}
@@ -83,12 +89,21 @@
 
   /* Brand column */
   .awai-footer__brand {
+    display: block;
+    text-decoration: none;
+    margin-bottom: 10px;
+  }
+  .awai-footer__logo-text {
     font-family: var(--font-heading);
     font-weight: 400;
     font-size: 1.05rem;
     letter-spacing: 0.08em;
     color: var(--cocoa);
-    margin-bottom: 10px;
+  }
+  .awai-footer__logo-img {
+    height: 17px;
+    width: auto;
+    display: block;
   }
 
   .awai-footer__desc {
@@ -232,6 +247,12 @@
 {
   "name": "Footer",
   "settings": [
+    {
+      "type": "image_picker",
+      "id": "logo",
+      "label": "Logo image",
+      "info": "Upload a logo image. Falls back to text 'awai' if empty."
+    },
     {
       "type": "textarea",
       "id": "description",

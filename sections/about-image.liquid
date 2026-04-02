@@ -1,0 +1,65 @@
+<div class="about-image full-width">
+  <div class="about-image__inner">
+    {% if section.settings.image != blank %}
+      {{ section.settings.image | image_url: width: 2400 | image_tag: loading: 'lazy' }}
+    {% else %}
+      <div class="about-image__placeholder">
+        <span>{{ section.settings.placeholder_text | default: 'Studio image' }}</span>
+      </div>
+    {% endif %}
+  </div>
+</div>
+
+{% stylesheet %}
+  .about-image {
+    margin: 0;
+  }
+  .about-image__inner {
+    width: 100%;
+    height: 65vh;
+    min-height: 380px;
+    position: relative;
+    overflow: hidden;
+  }
+  .about-image__inner img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+  .about-image__placeholder {
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(155deg, var(--vanille) 0%, var(--cloud-s) 50%, var(--sage-s) 100%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .about-image__placeholder span {
+    font-family: var(--font-heading);
+    font-size: 0.42rem;
+    font-weight: 500;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--ink-f);
+  }
+{% endstylesheet %}
+
+{% schema %}
+{
+  "name": "About Image",
+  "settings": [
+    {
+      "type": "image_picker",
+      "id": "image",
+      "label": "Image"
+    },
+    {
+      "type": "text",
+      "id": "placeholder_text",
+      "label": "Placeholder text",
+      "default": "Studio image"
+    }
+  ],
+  "presets": [{ "name": "About Image" }]
+}
+{% endschema %}

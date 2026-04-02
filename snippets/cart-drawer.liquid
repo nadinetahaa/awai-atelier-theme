@@ -1,0 +1,297 @@
+<!-- Cart Drawer Overlay -->
+<div class="cart-drawer__overlay" id="cart-drawer-overlay"></div>
+
+<!-- Cart Drawer -->
+<aside class="cart-drawer" id="cart-drawer" aria-label="Shopping cart">
+  <div class="cart-drawer__header">
+    <span class="cart-drawer__title">Your Cart</span>
+    <button class="cart-drawer__close" id="cart-drawer-close" aria-label="Close cart">
+      <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M4 4l8 8M12 4l-8 8" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/></svg>
+    </button>
+  </div>
+
+  <div class="cart-drawer__body" id="cart-drawer-body">
+    {% if cart.item_count == 0 %}
+      <div class="cart-drawer__empty">
+        <p>Your cart is empty.</p>
+        <a href="{{ routes.all_products_collection_url }}" class="cart-drawer__shop-link">Continue Shopping</a>
+      </div>
+    {% else %}
+      <div class="cart-drawer__items">
+        {% for item in cart.items %}
+          <div class="cart-drawer__item" data-key="{{ item.key }}">
+            <a href="{{ item.url }}" class="cart-drawer__item-img">
+              {% if item.image != blank %}
+                {{ item.image | image_url: width: 160 | image_tag: loading: 'lazy' }}
+              {% endif %}
+            </a>
+            <div class="cart-drawer__item-info">
+              <a href="{{ item.url }}" class="cart-drawer__item-title">{{ item.product.title }}</a>
+              {% if item.variant.title != 'Default Title' %}
+                <div class="cart-drawer__item-variant">{{ item.variant.title }}</div>
+              {% endif %}
+              <div class="cart-drawer__item-price">{{ item.original_price | money }}</div>
+              <div class="cart-drawer__item-actions">
+                <div class="cart-drawer__qty">
+                  <button type="button" class="cart-drawer__qty-btn" data-action="minus" data-key="{{ item.key }}">&minus;</button>
+                  <span class="cart-drawer__qty-val">{{ item.quantity }}</span>
+                  <button type="button" class="cart-drawer__qty-btn" data-action="plus" data-key="{{ item.key }}">+</button>
+                </div>
+                <button type="button" class="cart-drawer__remove" data-key="{{ item.key }}" aria-label="Remove">
+                  <svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M2 2l8 8M10 2l-8 8" stroke="currentColor" stroke-width="1" stroke-linecap="round"/></svg>
+                </button>
+              </div>
+            </div>
+          </div>
+        {% endfor %}
+      </div>
+    {% endif %}
+  </div>
+
+  {% if cart.item_count > 0 %}
+    <div class="cart-drawer__footer">
+      <div class="cart-drawer__total">
+        <span class="cart-drawer__total-label">Total</span>
+        <span class="cart-drawer__total-price" id="cart-drawer-total">{{ cart.total_price | money }}</span>
+      </div>
+      <p class="cart-drawer__note">Taxes and shipping calculated at checkout.</p>
+      <a href="{{ routes.cart_url }}/checkout" class="btn-primary cart-drawer__checkout">Checkout</a>
+    </div>
+  {% endif %}
+</aside>
+
+<style>
+  .cart-drawer__overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(61, 56, 53, 0.2);
+    backdrop-filter: blur(4px);
+    -webkit-backdrop-filter: blur(4px);
+    z-index: 200;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.35s ease, visibility 0.35s ease;
+  }
+  .cart-drawer__overlay.open {
+    opacity: 1;
+    visibility: visible;
+  }
+
+  .cart-drawer {
+    position: fixed;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    width: 400px;
+    max-width: 92vw;
+    background: var(--wh);
+    z-index: 210;
+    display: flex;
+    flex-direction: column;
+    transform: translateX(100%);
+    transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    box-shadow: -8px 0 32px rgba(61, 56, 53, 0.06);
+  }
+  .cart-drawer.open {
+    transform: translateX(0);
+  }
+
+  .cart-drawer__header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 24px 24px 20px;
+    border-bottom: 1px solid rgba(61, 56, 53, 0.06);
+    flex-shrink: 0;
+  }
+  .cart-drawer__title {
+    font-family: var(--font-heading);
+    font-size: 0.48rem;
+    font-weight: 700;
+    letter-spacing: 0.35em;
+    text-transform: uppercase;
+    color: var(--ink-f);
+  }
+  .cart-drawer__close {
+    background: none;
+    border: none;
+    cursor: pointer;
+    color: var(--ink-l);
+    padding: 4px;
+    transition: color 0.2s;
+    display: flex;
+  }
+  .cart-drawer__close:hover {
+    color: var(--cocoa);
+  }
+
+  .cart-drawer__body {
+    flex: 1;
+    overflow-y: auto;
+    padding: 0;
+  }
+
+  /* Empty state */
+  .cart-drawer__empty {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+    padding: 48px 24px;
+    text-align: center;
+  }
+  .cart-drawer__empty p {
+    font-size: 0.82rem;
+    color: var(--ink-l);
+    margin-bottom: 20px;
+  }
+  .cart-drawer__shop-link {
+    font-family: var(--font-heading);
+    font-size: 0.46rem;
+    font-weight: 600;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--ink-f);
+    text-decoration: none;
+    transition: color 0.3s;
+  }
+  .cart-drawer__shop-link:hover {
+    color: var(--cocoa);
+  }
+
+  /* Items */
+  .cart-drawer__item {
+    display: flex;
+    gap: 14px;
+    padding: 18px 24px;
+    border-bottom: 1px solid rgba(61, 56, 53, 0.04);
+  }
+  .cart-drawer__item-img {
+    width: 64px;
+    flex-shrink: 0;
+    aspect-ratio: 3 / 4;
+    border-radius: 10px;
+    overflow: hidden;
+    background: var(--sf);
+    display: block;
+  }
+  .cart-drawer__item-img img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+  .cart-drawer__item-info {
+    flex: 1;
+    min-width: 0;
+  }
+  .cart-drawer__item-title {
+    font-family: var(--font-heading);
+    font-weight: 500;
+    font-size: 0.74rem;
+    color: var(--cocoa);
+    text-decoration: none;
+    display: block;
+    margin-bottom: 1px;
+  }
+  .cart-drawer__item-title:hover {
+    color: var(--ink-m);
+  }
+  .cart-drawer__item-variant {
+    font-size: 0.6rem;
+    font-style: italic;
+    color: var(--ink-l);
+    margin-bottom: 4px;
+  }
+  .cart-drawer__item-price {
+    font-family: var(--font-heading);
+    font-weight: 500;
+    font-size: 0.56rem;
+    letter-spacing: 0.06em;
+    color: var(--ink-m);
+    margin-bottom: 8px;
+  }
+  .cart-drawer__item-actions {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  .cart-drawer__qty {
+    display: flex;
+    align-items: center;
+    border: 1px solid rgba(61, 56, 53, 0.1);
+    border-radius: 200px;
+    overflow: hidden;
+  }
+  .cart-drawer__qty-btn {
+    font-family: var(--font-heading);
+    font-size: 0.6rem;
+    font-weight: 300;
+    color: var(--ink-l);
+    background: none;
+    border: none;
+    cursor: pointer;
+    width: 28px;
+    height: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: color 0.2s;
+  }
+  .cart-drawer__qty-btn:hover { color: var(--cocoa); }
+  .cart-drawer__qty-val {
+    font-family: var(--font-heading);
+    font-size: 0.56rem;
+    font-weight: 500;
+    color: var(--cocoa);
+    min-width: 18px;
+    text-align: center;
+  }
+  .cart-drawer__remove {
+    background: none;
+    border: none;
+    cursor: pointer;
+    color: var(--ink-f);
+    padding: 4px;
+    transition: color 0.2s;
+    display: flex;
+  }
+  .cart-drawer__remove:hover { color: var(--cocoa); }
+
+  /* Footer */
+  .cart-drawer__footer {
+    padding: 20px 24px 24px;
+    border-top: 1px solid rgba(61, 56, 53, 0.06);
+    flex-shrink: 0;
+  }
+  .cart-drawer__total {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    margin-bottom: 6px;
+  }
+  .cart-drawer__total-label {
+    font-family: var(--font-heading);
+    font-size: 0.42rem;
+    font-weight: 700;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: var(--ink-f);
+  }
+  .cart-drawer__total-price {
+    font-family: var(--font-heading);
+    font-weight: 500;
+    font-size: 1rem;
+    color: var(--cocoa);
+  }
+  .cart-drawer__note {
+    font-size: 0.62rem;
+    color: var(--ink-l);
+    margin-bottom: 16px;
+  }
+  .cart-drawer__checkout {
+    display: block;
+    width: 100%;
+    text-align: center;
+  }
+</style>

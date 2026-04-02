@@ -13,26 +13,31 @@
 
 <div class="product-row full-width">
   {% if collection != blank and collection.products.size > 0 %}
+    {%- assign card_index = 0 -%}
     {% for product in collection.products limit: section.settings.products_to_show %}
-      <a href="{{ product.url }}" class="pcard rv{% if forloop.index > 1 %} d{{ forloop.index | minus: 1 }}{% endif %}">
-        <div class="pcard__img">
-          {% if product.featured_image != blank %}
-            {{ product.featured_image | image_url: width: 800 | image_tag: loading: 'lazy' }}
-          {% else %}
-            <span class="pcard__ph">Product image</span>
-          {% endif %}
-        </div>
-        <div class="pcard__info">
-          <div class="pcard__name">{{ product.title }}</div>
-          {% if product.variants.size > 1 %}
-            <div class="pcard__variant">{{ product.variants.first.title }}</div>
-          {% endif %}
-          <div class="pcard__price">{{ product.price | money }}</div>
-        </div>
-      </a>
+      {% for variant in product.variants %}
+        {%- assign card_index = card_index | plus: 1 -%}
+        <a href="{{ product.url }}?variant={{ variant.id }}" class="pcard rv{% if card_index > 1 %} d{{ card_index | minus: 1 | at_most: 4 }}{% endif %}">
+          <div class="pcard__img">
+            {% if variant.featured_image != blank %}
+              {{ variant.featured_image | image_url: width: 800 | image_tag: loading: 'lazy' }}
+            {% elsif product.featured_image != blank %}
+              {{ product.featured_image | image_url: width: 800 | image_tag: loading: 'lazy' }}
+            {% else %}
+              <span class="pcard__ph">Product image</span>
+            {% endif %}
+          </div>
+          <div class="pcard__info">
+            <div class="pcard__name">{{ product.title }}</div>
+            {% if variant.title != 'Default Title' %}
+              <div class="pcard__variant">{{ variant.title }}</div>
+            {% endif %}
+            <div class="pcard__price">{{ variant.price | money }}</div>
+          </div>
+        </a>
+      {% endfor %}
     {% endfor %}
   {% else %}
-    {% comment %} Placeholder cards when no collection is selected {% endcomment %}
     {% for i in (1..5) %}
       {%- assign colors = 'vanille-s,cloud-s,lila-s,blush-s,sage-s' | split: ',' -%}
       {%- assign color_index = forloop.index0 | modulo: 5 -%}
@@ -93,7 +98,7 @@
   }
 
   /* Product row card sizing (shared .pcard styles in critical.css) */
-  .pcard {
+  .product-row .pcard {
     flex: 0 0 calc(25% - var(--gap) * 3 / 4);
     min-width: 260px;
   }
@@ -102,7 +107,7 @@
     .product-row__label {
       padding: 28px 16px 14px;
     }
-    .pcard {
+    .product-row .pcard {
       flex: 0 0 72%;
       min-width: 220px;
     }
