@@ -1,3 +1,12 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
 {
   "sections": {
     "hero": {
@@ -5,23 +14,18 @@
       "settings": {
         "label": "Gifting",
         "heading": "Gifts that float above the rest.",
-        "subtext": "The Drifter is the kind of gift that makes a nursery. Whether for a baby shower, first birthday, or just because \u2014 every piece is 3D printed to order and arrives wrapped in kraft tissue, ready to give.",
+        "subtext": "The Drifter is the kind of gift that makes a nursery. Whether for a baby shower, first birthday, or just because — every piece is 3D printed to order and arrives wrapped in kraft tissue, ready to give.",
         "background_color": "#F5F1E6"
       }
     },
     "products": {
       "type": "gifting-products",
-      "settings": {
-        "label": "Gift Ideas",
-        "heading": "Pieces worth giving.",
-        "subtext": "Each Drifter arrives wrapped in kraft tissue with a hand-stamped sticker. Beautiful enough to give without extra wrapping."
-      },
       "blocks": {
         "lamp": {
           "type": "product",
           "settings": {
             "description": "A warm, glowing lamp that transforms any nursery corner. 3D printed from translucent plant-based PLA. The gift that makes the room.",
-            "fallback_title": "The Drifter \u2014 Lamp",
+            "fallback_title": "The Drifter — Lamp",
             "placeholder_color": "vanille-s"
           }
         },
@@ -29,12 +33,20 @@
           "type": "product",
           "settings": {
             "description": "A sculptural accent piece for shelves, dressers, or windowsills. Matte finish, beautifully tactile. The perfect baby shower gift.",
-            "fallback_title": "The Drifter \u2014 Sculpture",
+            "fallback_title": "The Drifter — Sculpture",
             "placeholder_color": "cloud-s"
           }
         }
       },
-      "block_order": ["lamp", "sculpture"]
+      "block_order": [
+        "lamp",
+        "sculpture"
+      ],
+      "settings": {
+        "label": "Gift Ideas",
+        "heading": "Pieces worth giving.",
+        "subtext": "Each Drifter arrives wrapped in kraft tissue with a hand-stamped sticker. Beautiful enough to give without extra wrapping."
+      }
     },
     "info": {
       "type": "gifting-info",
@@ -52,7 +64,7 @@
           "settings": {
             "icon": "heart",
             "title": "Baby shower favorite",
-            "text": "The Drifter is the gift that makes the room. Parents tell us it\u2019s the piece everyone asks about when they visit the nursery."
+            "text": "The Drifter is the gift that makes the room. Parents tell us it’s the piece everyone asks about when they visit the nursery."
           }
         },
         "note": {
@@ -60,20 +72,30 @@
           "settings": {
             "icon": "package",
             "title": "Include a note",
-            "text": "Add a personalized message at checkout. We\u2019ll tuck a handwritten note card inside the box on your behalf."
+            "text": "Add a personalized message at checkout. We’ll tuck a handwritten note card inside the box on your behalf."
           }
         }
       },
-      "block_order": ["packaging", "shower", "note"]
+      "block_order": [
+        "packaging",
+        "shower",
+        "note"
+      ],
+      "settings": {}
     },
     "closing": {
       "type": "page-richtext",
       "settings": {
         "heading": "Not sure which one to give?",
-        "body": "<p>The Lamp is for the parents who want a warm glow at bedtime \u2014 a piece that\u2019s functional and sculptural at once. The Sculpture is for anyone who loves beautiful objects \u2014 a purely decorative piece that sits on a shelf or dresser and catches the light.</p><p>Both are made from the same plant-based PLA, both arrive in the same considered packaging, and both tend to make people say: where did you find this?</p>",
+        "body": "<p>The Lamp is for the parents who want a warm glow at bedtime — a piece that’s functional and sculptural at once. The Sculpture is for anyone who loves beautiful objects — a purely decorative piece that sits on a shelf or dresser and catches the light.</p><p>Both are made from the same plant-based PLA, both arrive in the same considered packaging, and both tend to make people say: where did you find this?</p>",
         "background": "none"
       }
     }
   },
-  "order": ["hero", "products", "info", "closing"]
+  "order": [
+    "hero",
+    "products",
+    "info",
+    "closing"
+  ]
 }

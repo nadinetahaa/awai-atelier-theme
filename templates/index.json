@@ -1,10 +1,20 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
 {
   "sections": {
     "hero": {
       "type": "hero-banner",
       "settings": {
         "heading": "Up, Up and Awai.",
-        "cta_text": "Shop the Collection"
+        "cta_text": "Shop the Collection",
+        "cta_link": ""
       }
     },
     "collection_intro": {
@@ -20,6 +30,7 @@
       "settings": {
         "label": "The Drifter — Lamp",
         "link_text": "View All",
+        "collection": "frontpage",
         "products_to_show": 5
       }
     },
@@ -27,7 +38,10 @@
       "type": "editorial-image",
       "settings": {
         "placeholder_style": "style-a",
-        "placeholder_text": "Lifestyle — The Drifter Lamp at dusk"
+        "placeholder_text": "Lifestyle — The Drifter Lamp at dusk",
+        "overlay_text": "",
+        "cta_text": "",
+        "cta_link": ""
       }
     },
     "product_row_sculptures": {
@@ -35,16 +49,12 @@
       "settings": {
         "label": "The Drifter — Sculpture",
         "link_text": "View All",
+        "collection": "",
         "products_to_show": 5
       }
     },
     "brand_story": {
       "type": "brand-story",
-      "settings": {
-        "label": "The Atelier",
-        "heading": "Designed for the rooms where imagination begins.",
-        "body": "Every piece is 3D printed layer by layer from plant-based PLA. Made to order — no warehouses, no dead stock. The visible ridges of the printing process become a signature texture, catching light and inviting touch."
-      },
       "blocks": {
         "fact_material": {
           "type": "fact",
@@ -72,7 +82,13 @@
         "fact_material",
         "fact_process",
         "fact_studio"
-      ]
+      ],
+      "settings": {
+        "placeholder_text": "Studio / process image",
+        "label": "The Atelier",
+        "heading": "Designed for the rooms where imagination begins.",
+        "body": "Every piece is 3D printed layer by layer from plant-based PLA. Made to order — no warehouses, no dead stock. The visible ridges of the printing process become a signature texture, catching light and inviting touch."
+      }
     }
   },
   "order": [
