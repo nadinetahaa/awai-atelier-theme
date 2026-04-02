@@ -1,47 +1,143 @@
 {% comment %}
-  This section is used in the collection template to render collection page
-  listing all products within a collection.
-
-  https://shopify.dev/docs/storefronts/themes/architecture/templates/collection
+  Awai Atelier collection page.
+  Shows every variant of every product as its own card in a 2-column grid.
 {% endcomment %}
 
-<h1>{{ collection.title }}</h1>
+<!-- Collection header -->
+<div class="col-page__header rv full-width">
+  <span class="col-page__label">{{ collection.title }}</span>
+  {% if collection.description != blank %}
+    <p class="col-page__desc">{{ collection.description }}</p>
+  {% endif %}
+</div>
 
-<div class="collection-products">
-  {% paginate collection.products by 20 %}
+<!-- Product grid -->
+<div class="col-page__grid full-width">
+  {% paginate collection.products by section.settings.products_per_page %}
     {% for product in collection.products %}
-      <div class="collection-product">
-        {% if product.featured_image %}
-          {% render 'image',
-            class: 'collection-product__image',
-            image: product.featured_image,
-            url: product.url,
-            width: 400,
-            height: 400,
-            crop: 'center'
-          %}
-        {% endif %}
-        <div class="collection-product__content">
-          <p>{{ product.title | escape | link_to: product.url }}</p>
-          <p>{{ product.price | money }}</p>
-        </div>
-      </div>
+      {% for variant in product.variants %}
+        <a href="{{ product.url }}?variant={{ variant.id }}" class="pcard rv{% cycle '', ' d1', ' d2', ' d3' %}">
+          <div class="pcard__img"{% if variant.featured_image == blank and product.featured_image == blank %} style="background: var(--sf)"{% endif %}>
+            {% if variant.featured_image != blank %}
+              {{ variant.featured_image | image_url: width: 800 | image_tag: loading: 'lazy' }}
+            {% elsif product.featured_image != blank %}
+              {{ product.featured_image | image_url: width: 800 | image_tag: loading: 'lazy' }}
+            {% else %}
+              <span class="pcard__ph">Product image</span>
+            {% endif %}
+          </div>
+          <div class="pcard__info">
+            <div class="pcard__name">{{ product.title }}</div>
+            {% if variant.title != 'Default Title' %}
+              <div class="pcard__variant">{{ variant.title }}</div>
+            {% endif %}
+            <div class="pcard__price">{{ variant.price | money }}</div>
+          </div>
+        </a>
+      {% endfor %}
     {% endfor %}
 
-    {{ paginate | default_pagination }}
+    {% if paginate.pages > 1 %}
+      <nav class="col-page__pagination full-width rv">
+        {{ paginate | default_pagination }}
+      </nav>
+    {% endif %}
   {% endpaginate %}
 </div>
 
 {% stylesheet %}
-  .collection-products {
+  /* Header */
+  .col-page__header {
+    padding: 120px 28px 40px;
+    text-align: center;
+  }
+  .col-page__label {
+    font-family: var(--font-heading);
+    font-size: 0.44rem;
+    font-weight: 600;
+    letter-spacing: 0.35em;
+    text-transform: uppercase;
+    color: var(--ink-f);
+    display: block;
+    margin-bottom: 10px;
+  }
+  .col-page__desc {
+    font-size: 0.82rem;
+    line-height: 1.7;
+    color: var(--ink-l);
+    max-width: 480px;
+    margin: 0 auto;
+  }
+
+  /* Grid — 2 columns, 5px gaps, edge-to-edge */
+  .col-page__grid {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(500px, 1fr));
+    grid-template-columns: 1fr 1fr;
+    gap: var(--gap);
+  }
+
+  /* Reuse .pcard styles from product-row but allow grid sizing */
+  .col-page__grid .pcard {
+    flex: none;
+    min-width: 0;
+    width: 100%;
+  }
+
+  /* Pagination */
+  .col-page__pagination {
+    grid-column: 1 / -1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 12px;
+    padding: 48px 28px 80px;
+  }
+  .col-page__pagination a,
+  .col-page__pagination span {
+    font-family: var(--font-heading);
+    font-size: 0.52rem;
+    font-weight: 500;
+    letter-spacing: 0.1em;
+    color: var(--ink-l);
+    text-decoration: none;
+    transition: color 0.3s;
+    padding: 6px 10px;
+  }
+  .col-page__pagination a:hover {
+    color: var(--cocoa);
+  }
+  .col-page__pagination span.current {
+    color: var(--cocoa);
+    font-weight: 700;
+    border-bottom: 1px solid var(--cocoa);
+  }
+
+  @media (max-width: 600px) {
+    .col-page__header {
+      padding: 96px 16px 28px;
+    }
+    .col-page__grid {
+      grid-template-columns: 1fr;
+    }
+    .col-page__pagination {
+      padding: 36px 16px 56px;
+    }
   }
 {% endstylesheet %}
 
 {% schema %}
 {
-  "name": "t:general.collection",
-  "settings": []
+  "name": "Collection",
+  "settings": [
+    {
+      "type": "range",
+      "id": "products_per_page",
+      "min": 8,
+      "max": 48,
+      "step": 4,
+      "label": "Products per page",
+      "default": 24
+    }
+  ]
 }
 {% endschema %}
