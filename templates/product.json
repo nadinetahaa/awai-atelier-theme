@@ -1,3 +1,12 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
 {
   "sections": {
     "hero": {
@@ -7,6 +16,7 @@
         "subtitle": "Hot Air Balloon Lamp",
         "current_detail": "Translucent PLA · Warm glow",
         "companion_detail": "Matte PLA · Décor only",
+        "registry_url": "shopify://collections",
         "registry_text": "Add to your registry",
         "note_text": "Made to order · Free US shipping"
       }
@@ -14,12 +24,42 @@
     "details_strip": {
       "type": "product-details-strip",
       "blocks": {
-        "detail_1": { "type": "detail", "settings": { "label": "Material", "value": "Plant-based PLA" } },
-        "detail_2": { "type": "detail", "settings": { "label": "Process", "value": "Made to order" } },
-        "detail_3": { "type": "detail", "settings": { "label": "Lead Time", "value": "5–10 business days" } },
-        "detail_4": { "type": "detail", "settings": { "label": "Shipping", "value": "Complimentary within the US" } }
+        "detail_1": {
+          "type": "detail",
+          "settings": {
+            "label": "Material",
+            "value": "Plant-based PLA"
+          }
+        },
+        "detail_2": {
+          "type": "detail",
+          "settings": {
+            "label": "Process",
+            "value": "Made to order"
+          }
+        },
+        "detail_3": {
+          "type": "detail",
+          "settings": {
+            "label": "Lead Time",
+            "value": "5–10 business days"
+          }
+        },
+        "detail_4": {
+          "type": "detail",
+          "settings": {
+            "label": "Shipping",
+            "value": "Complimentary within the US"
+          }
+        }
       },
-      "block_order": ["detail_1", "detail_2", "detail_3", "detail_4"]
+      "block_order": [
+        "detail_1",
+        "detail_2",
+        "detail_3",
+        "detail_4"
+      ],
+      "settings": {}
     },
     "story": {
       "type": "product-story",
@@ -32,85 +72,253 @@
     },
     "specs": {
       "type": "product-specs",
+      "blocks": {
+        "spec_1": {
+          "type": "spec",
+          "settings": {
+            "title": "Dimensions — Large",
+            "subtitle": "Envelope + basket",
+            "value": "H 50cm × W 30cm (20\" × 12\")"
+          }
+        },
+        "spec_2": {
+          "type": "spec",
+          "settings": {
+            "title": "Dimensions — Small",
+            "subtitle": "Envelope + basket",
+            "value": "H 40cm × W 22cm (16\" × 9\")"
+          }
+        },
+        "spec_3": {
+          "type": "spec",
+          "settings": {
+            "title": "Weight",
+            "subtitle": "Lightweight for hanging",
+            "value": "380–520g depending on size"
+          }
+        },
+        "spec_4": {
+          "type": "spec",
+          "settings": {
+            "title": "Lamp — Light Source",
+            "subtitle": "Included LED module",
+            "value": "Warm white 2700K · dimmable"
+          }
+        },
+        "spec_5": {
+          "type": "spec",
+          "settings": {
+            "title": "Lamp — Cord",
+            "subtitle": "Fabric-wrapped in Vanille",
+            "value": "3m adjustable length"
+          }
+        },
+        "spec_6": {
+          "type": "spec",
+          "settings": {
+            "title": "Material",
+            "subtitle": "Plant-based, biodegradable",
+            "value": "Biosourced PLA filament"
+          }
+        }
+      },
+      "block_order": [
+        "spec_1",
+        "spec_2",
+        "spec_3",
+        "spec_4",
+        "spec_5",
+        "spec_6"
+      ],
       "settings": {
         "label": "Specifications",
         "heading": "Every detail, considered."
-      },
-      "blocks": {
-        "spec_1": { "type": "spec", "settings": { "title": "Dimensions — Large", "subtitle": "Envelope + basket", "value": "H 50cm × W 30cm (20\" × 12\")" } },
-        "spec_2": { "type": "spec", "settings": { "title": "Dimensions — Small", "subtitle": "Envelope + basket", "value": "H 40cm × W 22cm (16\" × 9\")" } },
-        "spec_3": { "type": "spec", "settings": { "title": "Weight", "subtitle": "Lightweight for hanging", "value": "380–520g depending on size" } },
-        "spec_4": { "type": "spec", "settings": { "title": "Lamp — Light Source", "subtitle": "Included LED module", "value": "Warm white 2700K · dimmable" } },
-        "spec_5": { "type": "spec", "settings": { "title": "Lamp — Cord", "subtitle": "Fabric-wrapped in Vanille", "value": "3m adjustable length" } },
-        "spec_6": { "type": "spec", "settings": { "title": "Material", "subtitle": "Plant-based, biodegradable", "value": "Biosourced PLA filament" } }
-      },
-      "block_order": ["spec_1", "spec_2", "spec_3", "spec_4", "spec_5", "spec_6"]
+      }
     },
     "colorways": {
       "type": "product-colorways",
+      "blocks": {
+        "color_1": {
+          "type": "color",
+          "settings": {
+            "name": "Vanille",
+            "color": "#ede8d6"
+          }
+        },
+        "color_2": {
+          "type": "color",
+          "settings": {
+            "name": "Cloud",
+            "color": "#c0cedc"
+          }
+        },
+        "color_3": {
+          "type": "color",
+          "settings": {
+            "name": "Lila",
+            "color": "#d5d0de"
+          }
+        },
+        "color_4": {
+          "type": "color",
+          "settings": {
+            "name": "Blush",
+            "color": "#ded4d8"
+          }
+        },
+        "color_5": {
+          "type": "color",
+          "settings": {
+            "name": "Sage",
+            "color": "#c8d0b8"
+          }
+        }
+      },
+      "block_order": [
+        "color_1",
+        "color_2",
+        "color_3",
+        "color_4",
+        "color_5"
+      ],
       "settings": {
         "label": "Colorways",
         "heading": "Choose your sky.",
         "description": "Each Drifter is printed in one of our signature Awai tones. Lamp variants use translucent material for that warm ambient glow. Sculptures are printed in our matte finish."
-      },
-      "blocks": {
-        "color_1": { "type": "color", "settings": { "name": "Vanille", "color": "#EDE8D6" } },
-        "color_2": { "type": "color", "settings": { "name": "Cloud", "color": "#C0CEDC" } },
-        "color_3": { "type": "color", "settings": { "name": "Lila", "color": "#D5D0DE" } },
-        "color_4": { "type": "color", "settings": { "name": "Blush", "color": "#DED4D8" } },
-        "color_5": { "type": "color", "settings": { "name": "Sage", "color": "#C8D0B8" } }
-      },
-      "block_order": ["color_1", "color_2", "color_3", "color_4", "color_5"]
+      }
     },
     "gallery": {
       "type": "product-gallery",
+      "blocks": {
+        "img_1": {
+          "type": "image",
+          "settings": {
+            "label": "Lamp — pendant glow at dusk"
+          }
+        },
+        "img_2": {
+          "type": "image",
+          "settings": {
+            "label": "Sculpture — shelf styling"
+          }
+        },
+        "img_3": {
+          "type": "image",
+          "settings": {
+            "label": "Pair — two sizes together"
+          }
+        },
+        "img_4": {
+          "type": "image",
+          "settings": {
+            "label": "Detail — ribbed texture macro"
+          }
+        },
+        "img_5": {
+          "type": "image",
+          "settings": {
+            "label": "Scale — next to crib"
+          }
+        }
+      },
+      "block_order": [
+        "img_1",
+        "img_2",
+        "img_3",
+        "img_4",
+        "img_5"
+      ],
       "settings": {
         "label": "In the Nursery",
         "heading": "The view from up here."
-      },
-      "blocks": {
-        "img_1": { "type": "image", "settings": { "label": "Lamp — pendant glow at dusk" } },
-        "img_2": { "type": "image", "settings": { "label": "Sculpture — shelf styling" } },
-        "img_3": { "type": "image", "settings": { "label": "Pair — two sizes together" } },
-        "img_4": { "type": "image", "settings": { "label": "Detail — ribbed texture macro" } },
-        "img_5": { "type": "image", "settings": { "label": "Scale — next to crib" } }
-      },
-      "block_order": ["img_1", "img_2", "img_3", "img_4", "img_5"]
+      }
     },
     "sustainability": {
       "type": "product-sustainability",
+      "blocks": {
+        "fact_1": {
+          "type": "fact",
+          "settings": {
+            "title": "Plant-based",
+            "description": "PLA derived from corn starch. Biodegradable under industrial composting."
+          }
+        },
+        "fact_2": {
+          "type": "fact",
+          "settings": {
+            "title": "Made to order",
+            "description": "Each piece is printed only after you place your order. Nothing sits in a warehouse."
+          }
+        },
+        "fact_3": {
+          "type": "fact",
+          "settings": {
+            "title": "Local production",
+            "description": "Designed and fabricated in-house. No overseas factories. No container ships."
+          }
+        },
+        "fact_4": {
+          "type": "fact",
+          "settings": {
+            "title": "Minimal packaging",
+            "description": "Kraft paper, tissue, and a sticker. Nothing you'd feel guilty about."
+          }
+        }
+      },
+      "block_order": [
+        "fact_1",
+        "fact_2",
+        "fact_3",
+        "fact_4"
+      ],
       "settings": {
         "label": "Made Mindfully",
         "heading": "Zero dead stock. Zero material waste.",
         "body": "Every Drifter is printed to order in our studio. No warehouses of unsold inventory. No excess production. We buy filament as orders come in and print each piece individually. The PLA we use is biosourced — derived from plant starch, not petroleum. It's the gentlest way to make something beautiful."
-      },
-      "blocks": {
-        "fact_1": { "type": "fact", "settings": { "title": "Plant-based", "description": "PLA derived from corn starch. Biodegradable under industrial composting." } },
-        "fact_2": { "type": "fact", "settings": { "title": "Made to order", "description": "Each piece is printed only after you place your order. Nothing sits in a warehouse." } },
-        "fact_3": { "type": "fact", "settings": { "title": "Local production", "description": "Designed and fabricated in-house. No overseas factories. No container ships." } },
-        "fact_4": { "type": "fact", "settings": { "title": "Minimal packaging", "description": "Kraft paper, tissue, and a sticker. Nothing you'd feel guilty about." } }
-      },
-      "block_order": ["fact_1", "fact_2", "fact_3", "fact_4"]
+      }
     },
     "reviews": {
       "type": "product-reviews",
+      "blocks": {
+        "review_1": {
+          "type": "review",
+          "settings": {
+            "text": "This is the piece that made the nursery. The glow at night is exactly what I imagined — warm, soft, like a little floating lantern. My daughter is mesmerized by it.",
+            "author": "Sarah M. · Verified Buyer"
+          }
+        },
+        "review_2": {
+          "type": "review",
+          "settings": {
+            "text": "I bought the sculpture as a baby shower gift and the mother literally cried. The texture, the packaging, everything felt so considered. It's art, not decor.",
+            "author": "Jordan K. · Verified Buyer"
+          }
+        },
+        "review_3": {
+          "type": "review",
+          "settings": {
+            "text": "We have two hanging above the crib at different heights. The ribbed texture catches the morning light in this way that makes it feel handmade and precious.",
+            "author": "Emily R. · Verified Buyer"
+          }
+        }
+      },
+      "block_order": [
+        "review_1",
+        "review_2",
+        "review_3"
+      ],
       "settings": {
         "label": "From Our Customers",
         "heading": "Worth every moment of the wait."
-      },
-      "blocks": {
-        "review_1": { "type": "review", "settings": { "text": "This is the piece that made the nursery. The glow at night is exactly what I imagined — warm, soft, like a little floating lantern. My daughter is mesmerized by it.", "author": "Sarah M. · Verified Buyer" } },
-        "review_2": { "type": "review", "settings": { "text": "I bought the sculpture as a baby shower gift and the mother literally cried. The texture, the packaging, everything felt so considered. It's art, not decor.", "author": "Jordan K. · Verified Buyer" } },
-        "review_3": { "type": "review", "settings": { "text": "We have two hanging above the crib at different heights. The ribbed texture catches the morning light in this way that makes it feel handmade and precious.", "author": "Emily R. · Verified Buyer" } }
-      },
-      "block_order": ["review_1", "review_2", "review_3"]
+      }
     },
     "final_cta": {
       "type": "product-final-cta",
       "settings": {
         "heading": "Every room needs a little lift.",
         "subtext": "3D printed to order in our studio. Plant-based material. Designed for the earliest dreamers.",
-        "button_text": "Shop The Drifter"
+        "button_text": "Shop The Drifter",
+        "button_link": ""
       }
     }
   },
