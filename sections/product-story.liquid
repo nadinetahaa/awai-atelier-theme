@@ -8,7 +8,7 @@
         <h2 class="pdp-story__heading rv d1">{{ section.settings.heading }}</h2>
       {% endif %}
       {% if section.settings.body != blank %}
-        <div class="pdp-story__body rv d2">{{ section.settings.body }}</div>
+        <p class="pdp-story__body rv d2">{{ section.settings.body }}</p>
       {% endif %}
     </div>
     <div class="pdp-story__visual rv d2">
@@ -22,30 +22,111 @@
 </section>
 
 {% stylesheet %}
-  .pdp-story *{box-sizing:border-box}
-  .pdp-story h2,.pdp-story p,.pdp-story span,.pdp-story div{margin:0 !important;padding:0;font-size:inherit !important;font-weight:inherit !important;line-height:inherit !important}
-
-  .pdp-story__inner{max-width:1100px;margin:0 auto;padding:120px 20px;display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:center}
-  .pdp-story__label{font-family:'Quicksand',sans-serif;font-size:.48rem !important;font-weight:700 !important;letter-spacing:.4em;text-transform:uppercase;color:var(--ink-f) !important;margin-bottom:14px !important;display:block}
-  .pdp-story__heading{font-family:'Quicksand',sans-serif;font-weight:300 !important;font-size:clamp(1.4rem,3vw,2rem) !important;line-height:1.35 !important;color:var(--cocoa) !important;margin-bottom:18px !important}
-  .pdp-story__body{font-size:.86rem !important;line-height:1.85 !important;color:var(--ink-m) !important}
-  .pdp-story__visual{border-radius:24px;overflow:hidden;background:var(--vanille);min-height:360px;display:flex;align-items:center;justify-content:center;position:relative}
-  .pdp-story__visual::after{content:'';position:absolute;inset:0;background:repeating-linear-gradient(0deg,rgba(192,206,220,.06) 0px,rgba(192,206,220,.06) 4px,transparent 4px,transparent 8px);pointer-events:none}
-  .pdp-story__visual img{width:100%;height:100%;object-fit:cover}
-  .pdp-story__visual-label{font-family:'Quicksand',sans-serif;font-size:.52rem !important;font-weight:600 !important;letter-spacing:.2em;text-transform:uppercase;color:var(--ink-f) !important;position:relative;z-index:1}
-  @media(max-width:800px){.pdp-story__inner{grid-template-columns:1fr;gap:40px}}
-  @media(max-width:600px){.pdp-story__inner{padding:80px 20px}}
+  .pdp-story__inner {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 120px 20px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 80px;
+    align-items: center;
+  }
+  .pdp-story__label {
+    font-family: var(--font-heading);
+    font-size: 0.48rem;
+    font-weight: 700;
+    letter-spacing: 0.4em;
+    text-transform: uppercase;
+    color: var(--ink-f);
+    margin-bottom: 14px;
+    display: block;
+  }
+  .pdp-story__heading {
+    font-family: var(--font-heading);
+    font-weight: 300;
+    font-size: clamp(1.4rem, 3vw, 2rem);
+    line-height: 1.35;
+    color: var(--cocoa);
+    margin-bottom: 18px;
+  }
+  .pdp-story__body {
+    font-size: 0.86rem;
+    line-height: 1.85;
+    color: var(--ink-m);
+  }
+  .pdp-story__visual {
+    border-radius: 24px;
+    overflow: hidden;
+    background: var(--vanille);
+    min-height: 360px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+  }
+  .pdp-story__visual::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: repeating-linear-gradient(0deg, rgba(192, 206, 220, 0.06) 0px, rgba(192, 206, 220, 0.06) 4px, transparent 4px, transparent 8px);
+    pointer-events: none;
+  }
+  .pdp-story__visual img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+  .pdp-story__visual-label {
+    font-family: var(--font-heading);
+    font-size: 0.52rem;
+    font-weight: 600;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--ink-f);
+    position: relative;
+    z-index: 1;
+  }
+  @media (max-width: 800px) {
+    .pdp-story__inner { grid-template-columns: 1fr; gap: 40px; }
+  }
+  @media (max-width: 600px) {
+    .pdp-story__inner { padding: 80px 20px; }
+  }
 {% endstylesheet %}
 
 {% schema %}
 {
   "name": "Product Story",
   "settings": [
-    { "type": "text", "id": "label", "label": "Section label", "default": "The Design" },
-    { "type": "text", "id": "heading", "label": "Heading", "default": "Drawn from the gentle geometry of things that float." },
-    { "type": "richtext", "id": "body", "label": "Body text", "default": "<p>The Drifter is inspired by the universal wonder of the hot air balloon \u2014 its rounded envelope, tapered basket, and the quiet feeling of something beautiful rising.</p>" },
-    { "type": "image_picker", "id": "image", "label": "Image" },
-    { "type": "text", "id": "placeholder_text", "label": "Placeholder text", "default": "Texture detail image" }
+    {
+      "type": "text",
+      "id": "label",
+      "label": "Section label",
+      "default": "The Design"
+    },
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "Drawn from the gentle geometry of things that float."
+    },
+    {
+      "type": "richtext",
+      "id": "body",
+      "label": "Body text",
+      "default": "<p>The Drifter is inspired by the universal wonder of the hot air balloon — its rounded envelope, tapered basket, and the quiet feeling of something beautiful rising. Each piece is printed over 10–14 hours on a single Bambu Lab printer, building layer upon layer of plant-based material. The visible ridges of the FDM printing process become a signature texture — a soft, ribbed surface that catches light and invites touch. The lamp version diffuses warm, amber light through translucent PLA, casting a gentle glow that transforms a nursery corner into somewhere worth dreaming about.</p>"
+    },
+    {
+      "type": "image_picker",
+      "id": "image",
+      "label": "Image"
+    },
+    {
+      "type": "text",
+      "id": "placeholder_text",
+      "label": "Placeholder text",
+      "default": "Texture detail image"
+    }
   ],
   "presets": [{ "name": "Product Story" }],
   "disabled_on": { "groups": ["header", "footer"] }

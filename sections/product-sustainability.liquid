@@ -23,37 +23,133 @@
 </section>
 
 {% stylesheet %}
-  .pdp-sustain *{box-sizing:border-box}
-  .pdp-sustain h2,.pdp-sustain h4,.pdp-sustain p,.pdp-sustain span{margin:0 !important;padding:0;font-size:inherit !important;font-weight:inherit !important;line-height:inherit !important}
-
-  .pdp-sustain__inner{max-width:1100px;margin:0 auto;padding:100px 20px}
-  .pdp-sustain__card{border-radius:28px;background:linear-gradient(145deg,var(--sage-s) 0%,var(--vanille-s) 100%);padding:clamp(40px,6vw,80px);position:relative;overflow:hidden}
-  .pdp-sustain__card::before{content:'';position:absolute;top:-40px;right:-30px;width:200px;height:200px;border-radius:50%;background:var(--cloud-s);opacity:.3;filter:blur(60px)}
-  .pdp-sustain__label{font-family:'Quicksand',sans-serif;font-size:.48rem !important;font-weight:700 !important;letter-spacing:.4em;text-transform:uppercase;color:var(--ink-f) !important;margin-bottom:14px !important;position:relative;z-index:1;display:block}
-  .pdp-sustain__heading{font-family:'Quicksand',sans-serif;font-weight:300 !important;font-size:clamp(1.4rem,3vw,2rem) !important;line-height:1.35 !important;color:var(--cocoa) !important;margin-bottom:18px !important;position:relative;z-index:1}
-  .pdp-sustain__body{font-size:.86rem !important;line-height:1.85 !important;color:var(--ink-m) !important;max-width:560px;position:relative;z-index:1;margin-bottom:28px !important}
-  .pdp-sustain__facts{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:16px;position:relative;z-index:1}
-  .pdp-sustain__fact{padding:16px !important;border-radius:16px;background:rgba(253,252,250,.6);backdrop-filter:blur(8px)}
-  .pdp-sustain__fact h4{font-family:'Quicksand',sans-serif;font-weight:600 !important;font-size:.6rem !important;letter-spacing:.1em;text-transform:uppercase;color:var(--cocoa) !important;margin-bottom:4px !important}
-  .pdp-sustain__fact p{font-size:.72rem !important;line-height:1.6 !important;color:var(--ink-l) !important}
-  @media(max-width:600px){.pdp-sustain__inner{padding:80px 20px}}
+  .pdp-sustain__inner {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 100px 20px;
+  }
+  .pdp-sustain__card {
+    border-radius: 28px;
+    background: linear-gradient(145deg, var(--sage-s) 0%, var(--vanille-s) 100%);
+    padding: clamp(40px, 6vw, 80px);
+    position: relative;
+    overflow: hidden;
+  }
+  .pdp-sustain__card::before {
+    content: '';
+    position: absolute;
+    top: -40px;
+    right: -30px;
+    width: 200px;
+    height: 200px;
+    border-radius: 50%;
+    background: var(--cloud-s);
+    opacity: 0.3;
+    filter: blur(60px);
+  }
+  .pdp-sustain__label {
+    font-family: var(--font-heading);
+    font-size: 0.48rem;
+    font-weight: 700;
+    letter-spacing: 0.4em;
+    text-transform: uppercase;
+    color: var(--ink-f);
+    margin-bottom: 14px;
+    position: relative;
+    z-index: 1;
+    display: block;
+  }
+  .pdp-sustain__heading {
+    font-family: var(--font-heading);
+    font-weight: 300;
+    font-size: clamp(1.4rem, 3vw, 2rem);
+    line-height: 1.35;
+    color: var(--cocoa);
+    margin-bottom: 18px;
+    position: relative;
+    z-index: 1;
+  }
+  .pdp-sustain__body {
+    font-size: 0.86rem;
+    line-height: 1.85;
+    color: var(--ink-m);
+    max-width: 560px;
+    position: relative;
+    z-index: 1;
+    margin-bottom: 28px;
+  }
+  .pdp-sustain__facts {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+    gap: 16px;
+    position: relative;
+    z-index: 1;
+  }
+  .pdp-sustain__fact {
+    padding: 16px;
+    border-radius: 16px;
+    background: rgba(253, 252, 250, 0.6);
+    backdrop-filter: blur(8px);
+  }
+  .pdp-sustain__fact h4 {
+    font-family: var(--font-heading);
+    font-weight: 600;
+    font-size: 0.6rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--cocoa);
+    margin-bottom: 4px;
+  }
+  .pdp-sustain__fact p {
+    font-size: 0.72rem;
+    line-height: 1.6;
+    color: var(--ink-l);
+  }
+  @media (max-width: 600px) {
+    .pdp-sustain__inner { padding: 80px 20px; }
+  }
 {% endstylesheet %}
 
 {% schema %}
 {
   "name": "Sustainability",
   "settings": [
-    { "type": "text", "id": "label", "label": "Section label", "default": "Made Mindfully" },
-    { "type": "text", "id": "heading", "label": "Heading", "default": "Zero dead stock. Zero material waste." },
-    { "type": "textarea", "id": "body", "label": "Body text", "default": "Every Drifter is printed to order in our studio. No warehouses of unsold inventory. No excess production. We buy filament as orders come in and print each piece individually. The PLA we use is biosourced \u2014 derived from plant starch, not petroleum. It\u2019s the gentlest way to make something beautiful." }
+    {
+      "type": "text",
+      "id": "label",
+      "label": "Section label",
+      "default": "Made Mindfully"
+    },
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "Zero dead stock. Zero material waste."
+    },
+    {
+      "type": "textarea",
+      "id": "body",
+      "label": "Body text",
+      "default": "Every Drifter is printed to order in our studio. No warehouses of unsold inventory. No excess production. We buy filament as orders come in and print each piece individually. The PLA we use is biosourced — derived from plant starch, not petroleum. It's the gentlest way to make something beautiful."
+    }
   ],
   "blocks": [
     {
       "type": "fact",
       "name": "Fact",
       "settings": [
-        { "type": "text", "id": "title", "label": "Title", "default": "Plant-based" },
-        { "type": "textarea", "id": "description", "label": "Description", "default": "PLA derived from corn starch. Biodegradable under industrial composting." }
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Title",
+          "default": "Plant-based"
+        },
+        {
+          "type": "textarea",
+          "id": "description",
+          "label": "Description",
+          "default": "PLA derived from corn starch. Biodegradable under industrial composting."
+        }
       ]
     }
   ],
@@ -64,7 +160,7 @@
         { "type": "fact", "settings": { "title": "Plant-based", "description": "PLA derived from corn starch. Biodegradable under industrial composting." } },
         { "type": "fact", "settings": { "title": "Made to order", "description": "Each piece is printed only after you place your order. Nothing sits in a warehouse." } },
         { "type": "fact", "settings": { "title": "Local production", "description": "Designed and fabricated in-house. No overseas factories. No container ships." } },
-        { "type": "fact", "settings": { "title": "Minimal packaging", "description": "Kraft paper, tissue, and a sticker. Nothing you\u2019d feel guilty about." } }
+        { "type": "fact", "settings": { "title": "Minimal packaging", "description": "Kraft paper, tissue, and a sticker. Nothing you'd feel guilty about." } }
       ]
     }
   ],
