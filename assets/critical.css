@@ -8,7 +8,7 @@
 }
 
 html {
-  font-size: 15px !important;
+  font-size: 15px;
   scroll-behavior: smooth;
 }
 
@@ -255,4 +255,13 @@ a {
   :root {
     --page-margin: 16px;
   }
+}
+
+/* Override Shopify injected base styles */
+.shopify-section h1,
+.shopify-section h2,
+.shopify-section h3,
+.shopify-section p {
+  margin-block-start: 0;
+  margin-block-end: 0;
 }
