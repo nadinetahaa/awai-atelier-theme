@@ -10,35 +10,13 @@
 </div>
 
 {% stylesheet %}
-  .pdp-details {
-    background: var(--sf);
-    padding: 48px 20px;
-    border-top: 1px solid rgba(61, 56, 53, 0.04);
-    border-bottom: 1px solid rgba(61, 56, 53, 0.04);
-  }
-  .pdp-details__inner {
-    max-width: 1100px;
-    margin: 0 auto;
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
-    gap: 32px;
-    text-align: center;
-  }
-  .pdp-details__item h3 {
-    font-family: var(--font-heading);
-    font-weight: 600;
-    font-size: 0.52rem;
-    letter-spacing: 0.2em;
-    text-transform: uppercase;
-    color: var(--ink-f);
-    margin-bottom: 6px;
-  }
-  .pdp-details__item p {
-    font-family: var(--font-heading);
-    font-weight: 400;
-    font-size: 0.82rem;
-    color: var(--cocoa);
-  }
+  .pdp-details *{box-sizing:border-box}
+  .pdp-details h3,.pdp-details p{margin:0 !important;padding:0;font-size:inherit !important;font-weight:inherit !important;line-height:inherit !important}
+
+  .pdp-details{background:var(--sf);padding:48px 20px;border-top:1px solid rgba(61,56,53,.04);border-bottom:1px solid rgba(61,56,53,.04)}
+  .pdp-details__inner{max-width:1100px;margin:0 auto;display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:32px;text-align:center}
+  .pdp-details__item h3{font-family:'Quicksand',sans-serif;font-weight:600 !important;font-size:.52rem !important;letter-spacing:.2em;text-transform:uppercase;color:var(--ink-f) !important;margin-bottom:6px !important}
+  .pdp-details__item p{font-family:'Quicksand',sans-serif;font-weight:400 !important;font-size:.82rem !important;color:var(--cocoa) !important}
 {% endstylesheet %}
 
 {% schema %}
@@ -50,18 +28,8 @@
       "type": "detail",
       "name": "Detail",
       "settings": [
-        {
-          "type": "text",
-          "id": "label",
-          "label": "Label",
-          "default": "Material"
-        },
-        {
-          "type": "text",
-          "id": "value",
-          "label": "Value",
-          "default": "Plant-based PLA"
-        }
+        { "type": "text", "id": "label", "label": "Label", "default": "Material" },
+        { "type": "text", "id": "value", "label": "Value", "default": "Plant-based PLA" }
       ]
     }
   ],
@@ -71,13 +39,11 @@
       "blocks": [
         { "type": "detail", "settings": { "label": "Material", "value": "Plant-based PLA" } },
         { "type": "detail", "settings": { "label": "Process", "value": "Made to order" } },
-        { "type": "detail", "settings": { "label": "Lead Time", "value": "5–10 business days" } },
+        { "type": "detail", "settings": { "label": "Lead Time", "value": "5\u201310 business days" } },
         { "type": "detail", "settings": { "label": "Shipping", "value": "Complimentary within the US" } }
       ]
     }
   ],
-  "disabled_on": {
-    "groups": ["header", "footer"]
-  }
+  "disabled_on": { "groups": ["header", "footer"] }
 }
 {% endschema %}

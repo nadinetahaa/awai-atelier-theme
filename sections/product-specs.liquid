@@ -10,9 +10,7 @@
       {% for block in section.blocks %}
         <div class="pdp-spec-card rv d{{ forloop.index | minus: 1 | modulo: 3 | plus: 1 }}" {{ block.shopify_attributes }}>
           <h3>{{ block.settings.title }}</h3>
-          {% if block.settings.subtitle != blank %}
-            <p>{{ block.settings.subtitle }}</p>
-          {% endif %}
+          {% if block.settings.subtitle != blank %}<p>{{ block.settings.subtitle }}</p>{% endif %}
           <div class="pdp-spec-card__value">{{ block.settings.value }}</div>
         </div>
       {% endfor %}
@@ -21,111 +19,37 @@
 </section>
 
 {% stylesheet %}
-  .pdp-specs {
-    background: var(--vanille-s);
-    padding: 100px 20px;
-  }
-  .pdp-specs__inner {
-    max-width: 1100px;
-    margin: 0 auto;
-  }
-  .pdp-specs__label {
-    font-family: var(--font-heading);
-    font-size: 0.48rem;
-    font-weight: 700;
-    letter-spacing: 0.4em;
-    text-transform: uppercase;
-    color: var(--ink-f);
-    margin-bottom: 14px;
-    display: block;
-  }
-  .pdp-specs__heading {
-    font-family: var(--font-heading);
-    font-weight: 300;
-    font-size: clamp(1.4rem, 3vw, 2rem);
-    line-height: 1.35;
-    color: var(--cocoa);
-    margin-bottom: 40px;
-  }
-  .pdp-specs__grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-    gap: 12px;
-  }
-  .pdp-spec-card {
-    padding: 24px;
-    border-radius: 24px;
-    background: var(--wh);
-    border: 1px solid rgba(61, 56, 53, 0.04);
-    transition: transform 0.3s;
-  }
-  .pdp-spec-card:hover {
-    transform: translateY(-2px);
-  }
-  .pdp-spec-card h3 {
-    font-family: var(--font-heading);
-    font-weight: 600;
-    font-size: 0.72rem;
-    letter-spacing: 0.04em;
-    margin-bottom: 8px;
-    color: var(--cocoa);
-  }
-  .pdp-spec-card p {
-    font-size: 0.76rem;
-    line-height: 1.7;
-    color: var(--ink-l);
-  }
-  .pdp-spec-card__value {
-    font-family: var(--font-heading);
-    font-weight: 500;
-    font-size: 0.86rem;
-    color: var(--cocoa);
-    margin-top: 4px;
-  }
-  @media (max-width: 600px) {
-    .pdp-specs { padding: 80px 20px; }
-  }
+  .pdp-specs *{box-sizing:border-box}
+  .pdp-specs h2,.pdp-specs h3,.pdp-specs p,.pdp-specs span,.pdp-specs div{margin:0 !important;padding:0;font-size:inherit !important;font-weight:inherit !important;line-height:inherit !important}
+
+  .pdp-specs{background:var(--vanille-s);padding:100px 20px}
+  .pdp-specs__inner{max-width:1100px;margin:0 auto}
+  .pdp-specs__label{font-family:'Quicksand',sans-serif;font-size:.48rem !important;font-weight:700 !important;letter-spacing:.4em;text-transform:uppercase;color:var(--ink-f) !important;margin-bottom:14px !important;display:block}
+  .pdp-specs__heading{font-family:'Quicksand',sans-serif;font-weight:300 !important;font-size:clamp(1.4rem,3vw,2rem) !important;line-height:1.35 !important;color:var(--cocoa) !important;margin-bottom:40px !important}
+  .pdp-specs__grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:12px}
+  .pdp-spec-card{padding:24px !important;border-radius:24px;background:var(--wh);border:1px solid rgba(61,56,53,.04);transition:transform .3s}
+  .pdp-spec-card:hover{transform:translateY(-2px)}
+  .pdp-spec-card h3{font-family:'Quicksand',sans-serif;font-weight:600 !important;font-size:.72rem !important;letter-spacing:.04em;margin-bottom:8px !important;color:var(--cocoa) !important}
+  .pdp-spec-card p{font-size:.76rem !important;line-height:1.7 !important;color:var(--ink-l) !important}
+  .pdp-spec-card__value{font-family:'Quicksand',sans-serif;font-weight:500 !important;font-size:.86rem !important;color:var(--cocoa) !important;margin-top:4px !important}
+  @media(max-width:600px){.pdp-specs{padding:80px 20px}}
 {% endstylesheet %}
 
 {% schema %}
 {
   "name": "Product Specs",
   "settings": [
-    {
-      "type": "text",
-      "id": "label",
-      "label": "Section label",
-      "default": "Specifications"
-    },
-    {
-      "type": "text",
-      "id": "heading",
-      "label": "Heading",
-      "default": "Every detail, considered."
-    }
+    { "type": "text", "id": "label", "label": "Section label", "default": "Specifications" },
+    { "type": "text", "id": "heading", "label": "Heading", "default": "Every detail, considered." }
   ],
   "blocks": [
     {
       "type": "spec",
       "name": "Spec Card",
       "settings": [
-        {
-          "type": "text",
-          "id": "title",
-          "label": "Title",
-          "default": "Dimensions"
-        },
-        {
-          "type": "text",
-          "id": "subtitle",
-          "label": "Subtitle"
-        },
-        {
-          "type": "text",
-          "id": "value",
-          "label": "Value",
-          "default": "H 50cm × W 30cm"
-        }
+        { "type": "text", "id": "title", "label": "Title", "default": "Dimensions" },
+        { "type": "text", "id": "subtitle", "label": "Subtitle" },
+        { "type": "text", "id": "value", "label": "Value", "default": "H 50cm \u00d7 W 30cm" }
       ]
     }
   ],
@@ -133,11 +57,11 @@
     {
       "name": "Product Specs",
       "blocks": [
-        { "type": "spec", "settings": { "title": "Dimensions — Large", "subtitle": "Envelope + basket", "value": "H 50cm × W 30cm (20\" × 12\")" } },
-        { "type": "spec", "settings": { "title": "Dimensions — Small", "subtitle": "Envelope + basket", "value": "H 40cm × W 22cm (16\" × 9\")" } },
-        { "type": "spec", "settings": { "title": "Weight", "subtitle": "Lightweight for hanging", "value": "380–520g depending on size" } },
-        { "type": "spec", "settings": { "title": "Lamp — Light Source", "subtitle": "Included LED module", "value": "Warm white 2700K · dimmable" } },
-        { "type": "spec", "settings": { "title": "Lamp — Cord", "subtitle": "Fabric-wrapped in Vanille", "value": "3m adjustable length" } },
+        { "type": "spec", "settings": { "title": "Dimensions \u2014 Large", "subtitle": "Envelope + basket", "value": "H 50cm \u00d7 W 30cm (20\" \u00d7 12\")" } },
+        { "type": "spec", "settings": { "title": "Dimensions \u2014 Small", "subtitle": "Envelope + basket", "value": "H 40cm \u00d7 W 22cm (16\" \u00d7 9\")" } },
+        { "type": "spec", "settings": { "title": "Weight", "subtitle": "Lightweight for hanging", "value": "380\u2013520g depending on size" } },
+        { "type": "spec", "settings": { "title": "Lamp \u2014 Light Source", "subtitle": "Included LED module", "value": "Warm white 2700K \u00b7 dimmable" } },
+        { "type": "spec", "settings": { "title": "Lamp \u2014 Cord", "subtitle": "Fabric-wrapped in Vanille", "value": "3m adjustable length" } },
         { "type": "spec", "settings": { "title": "Material", "subtitle": "Plant-based, biodegradable", "value": "Biosourced PLA filament" } }
       ]
     }

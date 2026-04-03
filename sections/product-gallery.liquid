@@ -22,122 +22,37 @@
 </section>
 
 {% stylesheet %}
-  .pdp-gallery {
-    padding: 100px 20px;
-    background: var(--sf);
-  }
-  .pdp-gallery__inner {
-    max-width: 1100px;
-    margin: 0 auto;
-  }
-  .pdp-gallery__label {
-    font-family: var(--font-heading);
-    font-size: 0.48rem;
-    font-weight: 700;
-    letter-spacing: 0.4em;
-    text-transform: uppercase;
-    color: var(--ink-f);
-    margin-bottom: 14px;
-    display: block;
-  }
-  .pdp-gallery__heading {
-    font-family: var(--font-heading);
-    font-weight: 300;
-    font-size: clamp(1.4rem, 3vw, 2rem);
-    line-height: 1.35;
-    color: var(--cocoa);
-    margin-bottom: 32px;
-  }
-  .pdp-gallery__grid {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    grid-template-rows: 300px 200px;
-    gap: 12px;
-  }
-  .pdp-gallery__item {
-    border-radius: 20px;
-    overflow: hidden;
-    background: var(--vanille);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    position: relative;
-    transition: transform 0.3s;
-  }
-  .pdp-gallery__item:hover {
-    transform: scale(1.01);
-  }
-  .pdp-gallery__item:first-child {
-    grid-row: span 2;
-  }
-  .pdp-gallery__item img {
-    position: absolute;
-    inset: 0;
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-  }
-  .pdp-gallery__item-label {
-    font-family: var(--font-heading);
-    font-size: 0.48rem;
-    font-weight: 600;
-    letter-spacing: 0.18em;
-    text-transform: uppercase;
-    color: var(--ink-l);
-    position: relative;
-    z-index: 1;
-  }
-  @media (max-width: 700px) {
-    .pdp-gallery__grid {
-      grid-template-columns: 1fr 1fr;
-      grid-template-rows: repeat(3, 200px);
-    }
-  }
-  @media (max-width: 600px) {
-    .pdp-gallery { padding: 80px 20px; }
-    .pdp-gallery__grid {
-      grid-template-columns: 1fr;
-      grid-template-rows: repeat(4, 180px);
-    }
-    .pdp-gallery__item:first-child {
-      grid-row: span 1;
-    }
-  }
+  .pdp-gallery *{box-sizing:border-box}
+  .pdp-gallery h2,.pdp-gallery span{margin:0 !important;padding:0;font-size:inherit !important;font-weight:inherit !important;line-height:inherit !important}
+
+  .pdp-gallery{padding:100px 20px;background:var(--sf)}
+  .pdp-gallery__inner{max-width:1100px;margin:0 auto}
+  .pdp-gallery__label{font-family:'Quicksand',sans-serif;font-size:.48rem !important;font-weight:700 !important;letter-spacing:.4em;text-transform:uppercase;color:var(--ink-f) !important;margin-bottom:14px !important;display:block}
+  .pdp-gallery__heading{font-family:'Quicksand',sans-serif;font-weight:300 !important;font-size:clamp(1.4rem,3vw,2rem) !important;line-height:1.35 !important;color:var(--cocoa) !important;margin-bottom:32px !important}
+  .pdp-gallery__grid{display:grid;grid-template-columns:repeat(3,1fr);grid-template-rows:300px 200px;gap:12px}
+  .pdp-gallery__item{border-radius:20px;overflow:hidden;background:var(--vanille);display:flex;align-items:center;justify-content:center;position:relative;transition:transform .3s}
+  .pdp-gallery__item:hover{transform:scale(1.01)}
+  .pdp-gallery__item:first-child{grid-row:span 2}
+  .pdp-gallery__item img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+  .pdp-gallery__item-label{font-family:'Quicksand',sans-serif;font-size:.48rem !important;font-weight:600 !important;letter-spacing:.18em;text-transform:uppercase;color:var(--ink-l) !important;position:relative;z-index:1}
+  @media(max-width:700px){.pdp-gallery__grid{grid-template-columns:1fr 1fr;grid-template-rows:repeat(3,200px)}}
+  @media(max-width:600px){.pdp-gallery{padding:80px 20px}.pdp-gallery__grid{grid-template-columns:1fr;grid-template-rows:repeat(4,180px)}.pdp-gallery__item:first-child{grid-row:span 1}}
 {% endstylesheet %}
 
 {% schema %}
 {
   "name": "Product Gallery",
   "settings": [
-    {
-      "type": "text",
-      "id": "label",
-      "label": "Section label",
-      "default": "In the Nursery"
-    },
-    {
-      "type": "text",
-      "id": "heading",
-      "label": "Heading",
-      "default": "The view from up here."
-    }
+    { "type": "text", "id": "label", "label": "Section label", "default": "In the Nursery" },
+    { "type": "text", "id": "heading", "label": "Heading", "default": "The view from up here." }
   ],
   "blocks": [
     {
       "type": "image",
       "name": "Gallery Image",
       "settings": [
-        {
-          "type": "image_picker",
-          "id": "image",
-          "label": "Image"
-        },
-        {
-          "type": "text",
-          "id": "label",
-          "label": "Caption",
-          "default": "Lifestyle image"
-        }
+        { "type": "image_picker", "id": "image", "label": "Image" },
+        { "type": "text", "id": "label", "label": "Caption", "default": "Lifestyle image" }
       ]
     }
   ],
@@ -145,11 +60,11 @@
     {
       "name": "Product Gallery",
       "blocks": [
-        { "type": "image", "settings": { "label": "Lamp — pendant glow at dusk" } },
-        { "type": "image", "settings": { "label": "Sculpture — shelf styling" } },
-        { "type": "image", "settings": { "label": "Pair — two sizes together" } },
-        { "type": "image", "settings": { "label": "Detail — ribbed texture macro" } },
-        { "type": "image", "settings": { "label": "Scale — next to crib" } }
+        { "type": "image", "settings": { "label": "Lamp \u2014 pendant glow at dusk" } },
+        { "type": "image", "settings": { "label": "Sculpture \u2014 shelf styling" } },
+        { "type": "image", "settings": { "label": "Pair \u2014 two sizes together" } },
+        { "type": "image", "settings": { "label": "Detail \u2014 ribbed texture macro" } },
+        { "type": "image", "settings": { "label": "Scale \u2014 next to crib" } }
       ]
     }
   ],

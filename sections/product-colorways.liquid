@@ -21,123 +21,38 @@
 </section>
 
 {% stylesheet %}
-  .pdp-colors__inner {
-    max-width: 1100px;
-    margin: 0 auto;
-    padding: 100px 20px;
-  }
-  .pdp-colors__label {
-    font-family: var(--font-heading);
-    font-size: 0.48rem;
-    font-weight: 700;
-    letter-spacing: 0.4em;
-    text-transform: uppercase;
-    color: var(--ink-f);
-    margin-bottom: 14px;
-    display: block;
-  }
-  .pdp-colors__heading {
-    font-family: var(--font-heading);
-    font-weight: 300;
-    font-size: clamp(1.4rem, 3vw, 2rem);
-    line-height: 1.35;
-    color: var(--cocoa);
-    margin-bottom: 12px;
-  }
-  .pdp-colors__sub {
-    font-size: 0.82rem;
-    line-height: 1.7;
-    color: var(--ink-m);
-    margin-bottom: 32px;
-    max-width: 520px;
-  }
-  .pdp-colors__options {
-    display: flex;
-    gap: 20px;
-    flex-wrap: wrap;
-  }
-  .pdp-color-opt {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 8px;
-    cursor: pointer;
-    transition: transform 0.3s;
-  }
-  .pdp-color-opt:hover {
-    transform: translateY(-3px);
-  }
-  .pdp-color-swatch {
-    width: 56px;
-    height: 56px;
-    border-radius: 50%;
-    border: 2px solid transparent;
-    transition: border-color 0.3s;
-    position: relative;
-  }
-  .pdp-color-opt.active .pdp-color-swatch {
-    border-color: var(--cocoa);
-  }
-  .pdp-color-opt.active .pdp-color-swatch::after {
-    content: '';
-    position: absolute;
-    inset: 4px;
-    border-radius: 50%;
-    border: 1px solid rgba(255, 255, 255, 0.6);
-  }
-  .pdp-color-name {
-    font-family: var(--font-heading);
-    font-size: 0.48rem;
-    font-weight: 600;
-    letter-spacing: 0.12em;
-    text-transform: uppercase;
-    color: var(--ink-f);
-  }
-  @media (max-width: 600px) {
-    .pdp-colors__inner { padding: 80px 20px; }
-  }
+  .pdp-colors *{box-sizing:border-box}
+  .pdp-colors h2,.pdp-colors p,.pdp-colors span{margin:0 !important;padding:0;font-size:inherit !important;font-weight:inherit !important;line-height:inherit !important}
+
+  .pdp-colors__inner{max-width:1100px;margin:0 auto;padding:100px 20px}
+  .pdp-colors__label{font-family:'Quicksand',sans-serif;font-size:.48rem !important;font-weight:700 !important;letter-spacing:.4em;text-transform:uppercase;color:var(--ink-f) !important;margin-bottom:14px !important;display:block}
+  .pdp-colors__heading{font-family:'Quicksand',sans-serif;font-weight:300 !important;font-size:clamp(1.4rem,3vw,2rem) !important;line-height:1.35 !important;color:var(--cocoa) !important;margin-bottom:12px !important}
+  .pdp-colors__sub{font-size:.82rem !important;line-height:1.7 !important;color:var(--ink-m) !important;margin-bottom:32px !important;max-width:520px}
+  .pdp-colors__options{display:flex;gap:20px;flex-wrap:wrap}
+  .pdp-color-opt{display:flex;flex-direction:column;align-items:center;gap:8px;cursor:pointer;transition:transform .3s}
+  .pdp-color-opt:hover{transform:translateY(-3px)}
+  .pdp-color-swatch{width:56px;height:56px;border-radius:50%;border:2px solid transparent;transition:border-color .3s;position:relative}
+  .pdp-color-opt.active .pdp-color-swatch{border-color:var(--cocoa)}
+  .pdp-color-opt.active .pdp-color-swatch::after{content:'';position:absolute;inset:4px;border-radius:50%;border:1px solid rgba(255,255,255,.6)}
+  .pdp-color-name{font-family:'Quicksand',sans-serif;font-size:.48rem !important;font-weight:600 !important;letter-spacing:.12em;text-transform:uppercase;color:var(--ink-f) !important}
+  @media(max-width:600px){.pdp-colors__inner{padding:80px 20px}}
 {% endstylesheet %}
 
 {% schema %}
 {
   "name": "Product Colorways",
   "settings": [
-    {
-      "type": "text",
-      "id": "label",
-      "label": "Section label",
-      "default": "Colorways"
-    },
-    {
-      "type": "text",
-      "id": "heading",
-      "label": "Heading",
-      "default": "Choose your sky."
-    },
-    {
-      "type": "textarea",
-      "id": "description",
-      "label": "Description",
-      "default": "Each Drifter is printed in one of our signature Awai tones. Lamp variants use translucent material for that warm ambient glow. Sculptures are printed in our matte finish."
-    }
+    { "type": "text", "id": "label", "label": "Section label", "default": "Colorways" },
+    { "type": "text", "id": "heading", "label": "Heading", "default": "Choose your sky." },
+    { "type": "textarea", "id": "description", "label": "Description", "default": "Each Drifter is printed in one of our signature Awai tones. Lamp variants use translucent material for that warm ambient glow. Sculptures are printed in our matte finish." }
   ],
   "blocks": [
     {
       "type": "color",
       "name": "Color",
       "settings": [
-        {
-          "type": "text",
-          "id": "name",
-          "label": "Color name",
-          "default": "Vanille"
-        },
-        {
-          "type": "color",
-          "id": "color",
-          "label": "Swatch color",
-          "default": "#EDE8D6"
-        }
+        { "type": "text", "id": "name", "label": "Color name", "default": "Vanille" },
+        { "type": "color", "id": "color", "label": "Swatch color", "default": "#EDE8D6" }
       ]
     }
   ],

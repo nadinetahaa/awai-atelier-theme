@@ -19,103 +19,35 @@
 </section>
 
 {% stylesheet %}
-  .pdp-reviews {
-    padding: 100px 20px;
-    background: var(--vanille-s);
-  }
-  .pdp-reviews__inner {
-    max-width: 1100px;
-    margin: 0 auto;
-  }
-  .pdp-reviews__label {
-    font-family: var(--font-heading);
-    font-size: 0.48rem;
-    font-weight: 700;
-    letter-spacing: 0.4em;
-    text-transform: uppercase;
-    color: var(--ink-f);
-    margin-bottom: 14px;
-    display: block;
-  }
-  .pdp-reviews__heading {
-    font-family: var(--font-heading);
-    font-weight: 300;
-    font-size: clamp(1.4rem, 3vw, 2rem);
-    line-height: 1.35;
-    color: var(--cocoa);
-    margin-bottom: 32px;
-  }
-  .pdp-reviews__grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-    gap: 12px;
-  }
-  .pdp-review-card {
-    padding: 24px;
-    border-radius: 24px;
-    background: var(--wh);
-    border: 1px solid rgba(61, 56, 53, 0.04);
-  }
-  .pdp-review-stars {
-    font-size: 0.7rem;
-    color: var(--citron);
-    margin-bottom: 10px;
-    letter-spacing: 2px;
-  }
-  .pdp-review-text {
-    font-size: 0.78rem;
-    line-height: 1.75;
-    color: var(--ink-m);
-    margin-bottom: 12px;
-    font-style: italic;
-  }
-  .pdp-review-author {
-    font-family: var(--font-heading);
-    font-size: 0.56rem;
-    font-weight: 600;
-    letter-spacing: 0.1em;
-    color: var(--ink-f);
-    text-transform: uppercase;
-  }
-  @media (max-width: 600px) {
-    .pdp-reviews { padding: 80px 20px; }
-  }
+  .pdp-reviews *{box-sizing:border-box}
+  .pdp-reviews h2,.pdp-reviews p,.pdp-reviews span{margin:0 !important;padding:0;font-size:inherit !important;font-weight:inherit !important;line-height:inherit !important}
+
+  .pdp-reviews{padding:100px 20px;background:var(--vanille-s)}
+  .pdp-reviews__inner{max-width:1100px;margin:0 auto}
+  .pdp-reviews__label{font-family:'Quicksand',sans-serif;font-size:.48rem !important;font-weight:700 !important;letter-spacing:.4em;text-transform:uppercase;color:var(--ink-f) !important;margin-bottom:14px !important;display:block}
+  .pdp-reviews__heading{font-family:'Quicksand',sans-serif;font-weight:300 !important;font-size:clamp(1.4rem,3vw,2rem) !important;line-height:1.35 !important;color:var(--cocoa) !important;margin-bottom:32px !important}
+  .pdp-reviews__grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:12px}
+  .pdp-review-card{padding:24px !important;border-radius:24px;background:var(--wh);border:1px solid rgba(61,56,53,.04)}
+  .pdp-review-stars{font-size:.7rem !important;color:var(--citron) !important;margin-bottom:10px !important;letter-spacing:2px}
+  .pdp-review-text{font-size:.78rem !important;line-height:1.75 !important;color:var(--ink-m) !important;margin-bottom:12px !important;font-style:italic}
+  .pdp-review-author{font-family:'Quicksand',sans-serif;font-size:.56rem !important;font-weight:600 !important;letter-spacing:.1em;color:var(--ink-f) !important;text-transform:uppercase}
+  @media(max-width:600px){.pdp-reviews{padding:80px 20px}}
 {% endstylesheet %}
 
 {% schema %}
 {
   "name": "Product Reviews",
   "settings": [
-    {
-      "type": "text",
-      "id": "label",
-      "label": "Section label",
-      "default": "From Our Customers"
-    },
-    {
-      "type": "text",
-      "id": "heading",
-      "label": "Heading",
-      "default": "Worth every moment of the wait."
-    }
+    { "type": "text", "id": "label", "label": "Section label", "default": "From Our Customers" },
+    { "type": "text", "id": "heading", "label": "Heading", "default": "Worth every moment of the wait." }
   ],
   "blocks": [
     {
       "type": "review",
       "name": "Review",
       "settings": [
-        {
-          "type": "textarea",
-          "id": "text",
-          "label": "Review text",
-          "default": "This is the piece that made the nursery."
-        },
-        {
-          "type": "text",
-          "id": "author",
-          "label": "Author",
-          "default": "Sarah M. · Verified Buyer"
-        }
+        { "type": "textarea", "id": "text", "label": "Review text", "default": "This is the piece that made the nursery." },
+        { "type": "text", "id": "author", "label": "Author", "default": "Sarah M. \u00b7 Verified Buyer" }
       ]
     }
   ],
@@ -123,9 +55,9 @@
     {
       "name": "Product Reviews",
       "blocks": [
-        { "type": "review", "settings": { "text": "This is the piece that made the nursery. The glow at night is exactly what I imagined — warm, soft, like a little floating lantern. My daughter is mesmerized by it.", "author": "Sarah M. · Verified Buyer" } },
-        { "type": "review", "settings": { "text": "I bought the sculpture as a baby shower gift and the mother literally cried. The texture, the packaging, everything felt so considered. It's art, not decor.", "author": "Jordan K. · Verified Buyer" } },
-        { "type": "review", "settings": { "text": "We have two hanging above the crib at different heights. The ribbed texture catches the morning light in this way that makes it feel handmade and precious.", "author": "Emily R. · Verified Buyer" } }
+        { "type": "review", "settings": { "text": "This is the piece that made the nursery. The glow at night is exactly what I imagined \u2014 warm, soft, like a little floating lantern. My daughter is mesmerized by it.", "author": "Sarah M. \u00b7 Verified Buyer" } },
+        { "type": "review", "settings": { "text": "I bought the sculpture as a baby shower gift and the mother literally cried. The texture, the packaging, everything felt so considered. It\u2019s art, not decor.", "author": "Jordan K. \u00b7 Verified Buyer" } },
+        { "type": "review", "settings": { "text": "We have two hanging above the crib at different heights. The ribbed texture catches the morning light in this way that makes it feel handmade and precious.", "author": "Emily R. \u00b7 Verified Buyer" } }
       ]
     }
   ],
